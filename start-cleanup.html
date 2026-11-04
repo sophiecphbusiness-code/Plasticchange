@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ff1054">
+    <meta name="description" content="Planlæg en cleanup med Plastic Change. Vælg hvem der deltager, hvor lang tid I har, og hvor I vil samle op — så får I en enkel guide.">
+    <title>Start jeres cleanup — Plastic Change</title>
+    <style>
+        @font-face { font-family: "Campton"; src: url("assets/fonts/CamptonBook.otf") format("opentype"); font-style: normal; font-weight: 400 500; font-display: swap; }
+        @font-face { font-family: "Campton"; src: url("assets/fonts/CamptonBold.otf") format("opentype"); font-style: normal; font-weight: 600 900; font-display: swap; }
+        @font-face { font-family: "Rubik"; src: url("assets/fonts/Rubik-Regular.ttf") format("truetype"); font-style: normal; font-weight: 400; font-display: swap; }
+        @font-face { font-family: "Rubik"; src: url("assets/fonts/Rubik-Medium.ttf") format("truetype"); font-style: normal; font-weight: 500; font-display: swap; }
+        @font-face { font-family: "Rubik"; src: url("assets/fonts/Rubik-Bold.ttf") format("truetype"); font-style: normal; font-weight: 700 900; font-display: swap; }
+        :root {
+            --pink: #ff1054;
+            --pink-dark: #da0c48;
+            --pink-pale: #fff0f4;
+            --ink: #35363f;
+            --muted: #70727e;
+            --line: #e4e7ec;
+            --blue-pale: #f4f4f6;
+            --blue: #ff1054;
+            --green: #287152;
+            --green-pale: #eaf4ee;
+            --paper: #fbfcfd;
+            --white: #fff;
+            --display: "Campton", sans-serif;
+            --body: "Rubik", sans-serif;
+        }
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--body); line-height: 1.5; }
+        a { color: inherit; }
+        button { font: inherit; }
+        button:focus-visible, a:focus-visible { outline: 3px solid #ff8cae; outline-offset: 3px; }
+        .announcement { padding: 9px 20px; background: var(--pink); color: #fff; text-align: center; font-size: .78rem; letter-spacing: .035em; }
+        .header { position: sticky; z-index: 10; top: 0; background: rgba(255,255,255,.97); border-bottom: 1px solid rgba(53,54,63,.09); backdrop-filter: blur(12px); }
+        .nav { display: flex; width: min(1180px, calc(100% - 48px)); height: 78px; align-items: center; justify-content: space-between; gap: 24px; margin: auto; }
+        .logo { display: inline-flex; flex: 0 0 auto; align-items: center; text-decoration: none; }
+        .logo img { display: block; width: 168px; height: auto; }
+        .nav-links { display: flex; align-items: center; gap: clamp(18px, 3vw, 40px); }
+        .nav-links a { color: var(--ink); font-size: .84rem; font-weight: 700; text-decoration: none; }
+        .nav-links a:hover { color: var(--pink); }
+        .nav-cta, .primary-button { display: inline-flex; min-height: 48px; align-items: center; justify-content: center; gap: 10px; padding: 0 21px; border: 0; border-radius: 999px; background: var(--pink); color: #fff !important; font-size: .88rem; font-weight: 800; text-decoration: none; cursor: pointer; transition: background .16s ease, transform .16s ease; }
+        .nav-cta:hover, .primary-button:hover { background: var(--pink-dark); transform: translateY(-1px); }
+        .nav-cta:hover, .primary-button:hover { background: #e20d4c; transform: translateY(-2px); }
+        .nav-links a.nav-cta:hover { color: #fff; }
+        .menu-toggle { display: none; width: 44px; height: 44px; border: 1px solid var(--line); border-radius: 50%; background: #fff; color: var(--ink); font-size: 1.2rem; cursor: pointer; }
+        main { position: relative; isolation: isolate; }
+        main:before { position: absolute; z-index: -1; inset: 0; background: #fff; content: ""; }
+        .masthead { position: relative; overflow: hidden; padding: 41px 20px 31px; background: transparent; text-align: center; }
+        .masthead-inner { position: relative; z-index: 1; }
+        .eyebrow { margin: 0 0 9px; color: var(--blue); font-size: .7rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
+        h1, h2, h3, p { margin-top: 0; }
+        h1, h2, h3 { font-family: var(--display); }
+        h1 { margin-bottom: 7px; font-size: clamp(2rem, 4vw, 2.7rem); font-weight: 700; letter-spacing: -.055em; line-height: 1.1; }
+        .masthead p:last-child { margin-bottom: 0; color: var(--muted); font-size: .95rem; }
+        .wizard-wrap { width: min(1060px, calc(100% - 40px)); margin: 0 auto; padding: 22px 0 38px; }
+        .progress { display: flex; max-width: 580px; justify-content: space-between; margin: 0 auto 25px; padding: 0; list-style: none; }
+        .progress li { position: relative; display: grid; flex: 1; justify-items: center; gap: 5px; color: #7d8493; font-size: .68rem; font-weight: 500; }
+        .progress li:not(:last-child):after { position: absolute; top: 15px; left: calc(50% + 19px); width: calc(100% - 38px); height: 2px; background: #e1e2e6; content: ""; }
+        .progress li.is-complete:not(:last-child):after { background: var(--pink); }
+        .progress-number { position: relative; z-index: 1; display: grid; width: 30px; height: 30px; place-items: center; border: 2px solid #e1e2e6; border-radius: 50%; background: #fff; color: var(--muted); font-size: .75rem; font-weight: 700; }
+        .progress li[aria-current="step"] { color: var(--ink); }
+        .progress li[aria-current="step"] .progress-number, .progress li.is-complete .progress-number { border-color: var(--blue); background: var(--blue); color: #fff; }
+        .wizard-card { padding: clamp(21px, 3.5vw, 37px); border: 1px solid #edf0f3; border-radius: 19px; background: #fff; box-shadow: 0 16px 44px rgba(35,55,84,.07); }
+        .step-panel[hidden] { display: none; }
+        .panel-heading { margin-bottom: 19px; }
+        .panel-heading h2 { margin-bottom: 5px; font-size: clamp(1.4rem, 3vw, 1.75rem); font-weight: 700; letter-spacing: -.045em; }
+        .panel-heading p { margin-bottom: 0; color: var(--muted); font-size: .86rem; }
+        .choice-layout { display: grid; grid-template-columns: 1.08fr .92fr; align-items: stretch; gap: 23px; }
+        .choice-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+        .choice-card { display: flex; min-height: 202px; flex-direction: column; align-items: flex-start; padding: 19px; border: 2px solid var(--line); border-radius: 14px; background: #fff; color: var(--ink); text-align: left; cursor: pointer; transition: border .16s ease, transform .16s ease, box-shadow .16s ease; }
+        .choice-card.education { background: #f3f3f5; }
+        .choice-card.family { background: var(--pink-pale); }
+        .choice-card:hover { transform: translateY(-2px); border-color: #f5a1b8; box-shadow: 0 10px 24px rgba(53,54,63,.09); }
+        .choice-card[aria-pressed="true"] { border-color: var(--pink); box-shadow: 0 0 0 3px rgba(255,16,84,.09); }
+        .choice-card.family[aria-pressed="true"] { border-color: var(--pink); box-shadow: 0 0 0 3px rgba(255,16,84,.09); }
+        .choice-icon { display: grid; width: 42px; height: 42px; margin-bottom: 12px; place-items: center; border-radius: 12px; background: rgba(255,255,255,.78); color: var(--blue); }
+        .family .choice-icon { color: var(--pink); }
+        .choice-icon svg { width: 24px; height: 24px; }
+        .choice-card strong { margin-bottom: 4px; font-family: var(--display); font-size: 1.05rem; font-weight: 700; }
+        .choice-card span:last-child { color: var(--muted); font-size: .76rem; line-height: 1.45; }
+        .photo-panel { position: relative; min-height: 202px; overflow: hidden; border-radius: 14px 38% 14px 14px; background: #f1ecee; }
+        .photo-panel img { position: absolute; width: 100%; height: 100%; object-fit: cover; object-position: center 42%; }
+        .photo-caption { position: absolute; right: 11px; bottom: 11px; left: 11px; padding: 10px 13px; border-radius: 10px; background: rgba(255,255,255,.95); color: var(--ink); font-size: .73rem; font-weight: 500; }
+        .step-two-grid, .place-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 13px; }
+        .option-card { display: flex; min-height: 136px; flex-direction: column; align-items: flex-start; padding: 18px; border: 2px solid var(--line); border-radius: 13px; background: #fff; color: var(--ink); text-align: left; cursor: pointer; transition: border .16s ease, background .16s ease, transform .16s ease; }
+        .option-card:hover { transform: translateY(-2px); border-color: #f5a1b8; }
+        .option-card[aria-pressed="true"] { border-color: var(--pink); background: var(--pink-pale); }
+        .option-icon { margin-bottom: 12px; color: var(--pink); font-size: 1.35rem; line-height: 1; }
+        .option-card strong { margin-bottom: 4px; font-family: var(--display); font-size: .99rem; font-weight: 700; }
+        .option-card span:last-child { color: var(--muted); font-size: .76rem; }
+        .safety-note { display: flex; align-items: flex-start; gap: 12px; margin-top: 21px; padding: 15px 17px; border-radius: 11px; background: var(--green-pale); color: #355a49; font-size: .78rem; }
+        .leaf { display: grid; flex: 0 0 31px; height: 31px; place-items: center; border-radius: 50%; background: #fff; color: var(--green); font-size: 1rem; }
+        .safety-note strong { display: block; margin-bottom: 2px; color: #254b3a; font-size: .81rem; }
+        .panel-actions { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-top: 23px; }
+        .back-button { min-height: 43px; padding: 0 13px; border: 0; background: transparent; color: #616b7d; font-size: .83rem; font-weight: 500; cursor: pointer; }
+        .back-button:hover { color: var(--pink-dark); }
+        .primary-button:disabled { background: #c6c9d0; cursor: not-allowed; transform: none; }
+        .primary-button svg { width: 17px; height: 17px; }
+        .plan-summary { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 20px 0; }
+        .summary-cell { padding: 15px; border-radius: 11px; background: #f6f8fa; }
+        .summary-cell small { display: block; margin-bottom: 4px; color: var(--muted); font-size: .69rem; font-weight: 500; }
+        .summary-cell strong { font-family: var(--display); font-size: .9rem; font-weight: 700; }
+        .ready-guide { padding: 19px 20px; border-radius: 13px; background: var(--green-pale); }
+        .ready-guide h3 { margin-bottom: 10px; color: #254b3a; font-size: 1rem; font-weight: 700; }
+        .ready-guide ul { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; color: #355a49; font-size: .81rem; }
+        .ready-guide li { display: flex; align-items: flex-start; gap: 9px; }
+        .ready-guide li:before { color: var(--green); content: "✓"; font-weight: 700; }
+        .privacy-note { margin: 14px 0 0; color: var(--muted); font-size: .7rem; }
+        .next-steps { display: flex; flex-wrap: wrap; justify-content: center; gap: 11px; margin-top: 18px; }
+        .celebration-actions[hidden] { display: none; }
+        .celebration-actions:not([hidden]) { display: flex; flex-wrap: wrap; justify-content: center; gap: 11px; }
+        .primary-button[hidden] { display: none; }
+        .celebration-status { margin: 16px 0 0; color: var(--green); font-size: .9rem; font-weight: 700; }
+        .confetti-canvas { position: fixed; z-index: 20; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+        .secondary-button { display: inline-flex; min-height: 43px; align-items: center; justify-content: center; gap: 8px; padding: 0 16px; border: 1px solid var(--line); border-radius: 9px; background: #fff; color: var(--ink); font-size: .81rem; font-weight: 500; text-decoration: none; cursor: pointer; }
+        .secondary-button:hover { border-color: var(--pink); color: var(--pink-dark); }
+        footer { padding: 19px 0; background: #fff; color: var(--ink); border-top: 1px solid var(--line); }
+        .footer-inner { display: flex; width: min(1060px, calc(100% - 40px)); align-items: center; justify-content: space-between; gap: 18px; margin: auto; }
+        .footer-inner img { width: 138px; height: auto; }
+        .footer-links { display: flex; flex-wrap: wrap; gap: 19px; }
+        .footer-links a { color: var(--muted); font-size: .72rem; text-decoration: none; }
+        .footer-links a:hover { color: var(--pink); }
+        .footer-note { max-width: 250px; margin: 0; color: var(--muted); font-size: .68rem; }
+        @media (max-width: 800px) {
+            .nav { width: calc(100% - 32px); height: 64px; }
+            .logo img { width: 137px; }
+            .menu-toggle { display: grid; place-items: center; }
+            .nav-links { position: absolute; top: 64px; right: 0; left: 0; display: none; padding: 15px 22px 20px; flex-direction: column; align-items: stretch; gap: 0; border-bottom: 1px solid var(--line); background: #fff; }
+            .nav-links.is-open { display: flex; }
+            .nav-links a { padding: 12px 0; }
+            .nav-links .nav-cta { align-self: flex-start; margin-top: 8px; padding: 0 17px; }
+            .masthead { padding: 34px 18px 24px; }
+            .wizard-wrap { width: calc(100% - 28px); padding: 19px 0 27px; }
+            .progress { margin-bottom: 18px; }
+            .wizard-card { padding: 21px 17px; }
+            .choice-layout { grid-template-columns: 1fr; gap: 14px; }
+            .choice-grid { grid-template-columns: 1fr; gap: 9px; }
+            .choice-card { min-height: 0; padding: 15px; }
+            .photo-panel { min-height: 230px; }
+            .footer-inner { flex-direction: column; align-items: flex-start; }
+            .footer-note { max-width: none; }
+        }
+        @media (max-width: 460px) {
+            .announcement { font-size: .66rem; }
+            .step-two-grid, .place-grid { grid-template-columns: 1fr; gap: 9px; }
+            .option-card { min-height: 90px; flex-direction: row; align-items: center; gap: 13px; padding: 14px; }
+            .option-icon { margin: 0; }
+            .option-copy { display: grid; gap: 2px; }
+            .option-card strong { margin: 0; }
+            .plan-summary { grid-template-columns: 1fr 1fr; gap: 8px; }
+            .summary-cell { padding: 12px; }
+            .footer-links { gap: 13px; }
+        }
+        @media print {
+            .announcement, .header, .masthead, .progress, .panel-actions, .next-steps, .celebration-actions, .confetti-canvas, footer { display: none !important; }
+            body, .wizard-wrap { background: #fff; }
+            .wizard-wrap { width: 100%; padding: 0; }
+            .wizard-card { border: 0; box-shadow: none; }
+            .step-panel[hidden] { display: none !important; }
+            #step-4[hidden] { display: block !important; }
+        }
+        @media (prefers-reduced-motion: reduce) { *, *:before, *:after { scroll-behavior: auto !important; transition-duration: .01ms !important; } }
+        .path-dialog { width: min(620px, calc(100% - 28px)); padding: 0; border: 0; border-radius: 22px; background: #fff; color: var(--ink); box-shadow: 0 24px 90px rgba(28,34,48,.28); }
+        .path-dialog::backdrop { background: rgba(35,36,45,.58); backdrop-filter: blur(4px); }
+        .path-dialog-inner { padding: clamp(24px, 5vw, 42px); }
+        .path-dialog h2 { margin-bottom: 8px; font-family: var(--display); font-size: clamp(1.8rem, 5vw, 2.45rem); letter-spacing: -.05em; line-height: 1.05; }
+        .path-dialog p { margin-bottom: 22px; color: var(--muted); font-size: .9rem; }
+        .path-options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .path-option { display: flex; min-height: 155px; flex-direction: column; align-items: flex-start; padding: 19px; border: 1px solid var(--line); border-radius: 14px; background: #fff; color: var(--ink); text-align: left; text-decoration: none; }
+        .path-option:hover { border-color: var(--pink); box-shadow: 0 8px 22px rgba(53,54,63,.08); }
+        .path-option.school { border-color: #f5c6d3; background: var(--pink-pale); }
+        .path-option strong { margin: 0 0 7px; font-family: var(--display); font-size: 1.05rem; }
+        .path-option span { margin-bottom: 13px; color: var(--muted); font-size: .78rem; }
+        .path-option b { margin-top: auto; color: var(--pink); font-size: .82rem; }
+        .path-dialog-note { margin: 17px 0 0!important; font-size: .72rem!important; }
+        .path-dialog .eyebrow { color: #ff1054; }
+        .path-dialog-actions { display: flex; justify-content: flex-start; margin-top: 14px; }
+        .path-back { display: inline-block; padding: 7px 0; border: 0; background: transparent; color: var(--muted); font-size: .78rem; font-weight: 600; text-decoration: none; cursor: pointer; }
+        .path-back:hover { color: var(--pink); }
+        @media(max-width:520px) { .path-options { grid-template-columns: 1fr; } .path-option { min-height: 125px; } }
+    </style>
+    <link rel="stylesheet" href="assets/site-chrome.css">
+</head>
+<body>
+    <div class="announcement"><strong>World Cleanup Day</strong> · Små handlinger. En stor forskel sammen.</div>
+    <header class="site-header">
+        <div class="nav-wrap">
+            <a class="brand" href="index.html#top" aria-label="Plastic Change — tilbage til forsiden"><img src="assets/plastic-change-logo.png" alt="Plastic Change"></a>
+            <button class="menu-toggle" type="button" aria-label="Åbn menu" aria-expanded="false" aria-controls="main-nav">☰</button>
+            <nav class="nav-links" id="main-nav" aria-label="Hovedmenu">
+                <a href="index.html#top">Forside</a>
+                <a href="kommuner-skoleforloeb.html#forloeb">Skoleforløb</a>
+                <a href="viden.html">Viden</a>
+                <a class="button" href="start-cleanup.html">Start en cleanup</a>
+                <a class="button" href="stoet-plastic-change.html">Støt Plastic Change</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <dialog class="path-dialog" id="path-dialog" aria-labelledby="path-dialog-title">
+            <div class="path-dialog-inner">
+                <p class="eyebrow">Vælg jeres vej</p>
+                <h2 id="path-dialog-title">Hvad vil I starte?</h2>
+                <p>Vælg den cleanup-guide, der passer til jer. Skoleforløbet starter med et kort demo-login til lærere.</p>
+                <div class="path-options">
+                    <a class="path-option" href="#continue-free" id="continue-free">
+                        <strong>Start Cleanup</strong>
+                        <span>En enkel guide til familie, venner og små grupper.</span>
+                        <b>Fortsæt gratis →</b>
+                    </a>
+                    <a class="path-option school" href="skole-login.html">
+                        <strong>Skoleforløb</strong>
+                        <span>Planlæg klassens forløb og hent lærer- og elevmaterialer.</span>
+                        <b>Gå til skoleforløbet →</b>
+                    </a>
+                </div>
+                <p class="path-dialog-note">Demo: Loginoplysninger bliver ikke sendt eller gemt.</p>
+                <div class="path-dialog-actions"><a class="path-back" href="index.html#top">← Tilbage til forsiden</a></div>
+            </div>
+        </dialog>
+        <section class="masthead" aria-labelledby="page-title">
+            <div class="masthead-inner">
+                <p class="eyebrow">World Cleanup Day · Plastic Change</p>
+                <h1 id="page-title">Start jeres cleanup</h1>
+                <p>Få en færdig guide på få minutter.</p>
+            </div>
+        </section>
+
+        <div class="wizard-wrap" id="wizard">
+            <ol class="progress" aria-label="Planlægningens trin">
+                <li aria-current="step"><span class="progress-number">1</span><span>Hvem</span></li>
+                <li><span class="progress-number">2</span><span>Tid</span></li>
+                <li><span class="progress-number">3</span><span>Område</span></li>
+                <li><span class="progress-number">4</span><span>Klar</span></li>
+            </ol>
+
+            <div class="wizard-card">
+                <section class="step-panel" id="step-1" aria-labelledby="step-title-1">
+                    <div class="panel-heading"><h2 id="step-title-1" tabindex="-1">Hvem deltager?</h2><p>Vælg den guide, der passer bedst til jeres gruppe.</p></div>
+                    <div class="choice-layout">
+                        <div class="choice-grid" role="group" aria-label="Vælg deltagergruppe">
+                            <button class="choice-card private" type="button" data-group="private" aria-pressed="false">
+                                <span class="choice-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 21v-1.5a7 7 0 0 1 14 0V21"/></svg></span>
+                                <strong>Privat</strong><span>En enkel guide til dig eller en lille gruppe.</span>
+                            </button>
+                            <button class="choice-card education" type="button" data-group="education" aria-pressed="false">
+                                <span class="choice-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-5h6v5M8 10h1m6 0h1M8 13h1m6 0h1"/></svg></span>
+                                <strong>Undervisning</strong><span>For lærere, klasser og undervisningsforløb.</span>
+                            </button>
+                            <button class="choice-card family" type="button" data-group="family" aria-pressed="false">
+                                <span class="choice-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="7" r="3"/><circle cx="17" cy="8" r="2.5"/><path d="M2.5 20v-2a5.5 5.5 0 0 1 11 0v2M14 14a4.5 4.5 0 0 1 7.5 3.3V20h-6"/></svg></span>
+                                <strong>Familie</strong><span>En nem guide til hele familien.</span>
+                            </button>
+                        </div>
+                        <div class="photo-panel"><img src="assets/cleanup.jpg" alt="Frivillige samler affald op sammen" fetchpriority="high" decoding="async"><div class="photo-caption">En lille indsats i jeres nærområde kan sætte gang i en stor samtale.</div></div>
+                    </div>
+                    <div class="safety-note"><span class="leaf" aria-hidden="true">✳</span><span><strong>Det tager kun et par minutter</strong>I får en færdig guide med materialer, sikkerhed, tips og forslag til, hvor I kan rydde op.</span></div>
+                    <div class="panel-actions"><span></span><button class="primary-button next-button" type="button" disabled>Næste trin <span aria-hidden="true">→</span></button></div>
+                </section>
+
+                <section class="step-panel" id="step-2" aria-labelledby="step-title-2" hidden>
+                    <div class="panel-heading"><h2 id="step-title-2" tabindex="-1">Hvor lang tid har I?</h2><p>Vælg en varighed, der passer ind i jeres dag. En kort tur tæller også.</p></div>
+                    <div class="step-two-grid" role="group" aria-label="Vælg varighed">
+                        <button class="option-card" type="button" data-duration="30 minutter" aria-pressed="false"><span class="option-icon" aria-hidden="true">◷</span><span class="option-copy"><strong>30 minutter</strong><span>En kort tur tæt på</span></span></button>
+                        <button class="option-card" type="button" data-duration="45 minutter" aria-pressed="false"><span class="option-icon" aria-hidden="true">◷</span><span class="option-copy"><strong>45 minutter</strong><span>Tid til at gå på opdagelse</span></span></button>
+                        <button class="option-card" type="button" data-duration="60 minutter" aria-pressed="false"><span class="option-icon" aria-hidden="true">◷</span><span class="option-copy"><strong>60 minutter</strong><span>Med tid til fælles opsamling</span></span></button>
+                    </div>
+                    <div class="safety-note"><span class="leaf" aria-hidden="true">✳</span><span><strong>Det behøver ikke være perfekt</strong>I bestemmer tempoet. Hold en pause, hvis I har brug for det.</span></div>
+                    <div class="panel-actions"><button class="back-button" type="button" data-back>← Tilbage</button><button class="primary-button next-button" type="button" disabled>Næste trin <span aria-hidden="true">→</span></button></div>
+                </section>
+
+                <section class="step-panel" id="step-3" aria-labelledby="step-title-3" hidden>
+                    <div class="panel-heading"><h2 id="step-title-3" tabindex="-1">Hvor vil I samle op?</h2><p>Vælg et område i nærheden. I behøver ikke dele en præcis adresse.</p></div>
+                    <div class="place-grid" role="group" aria-label="Vælg område">
+                        <button class="option-card" type="button" data-place="En park eller et grønt område" aria-pressed="false"><span class="option-icon" aria-hidden="true">♧</span><span class="option-copy"><strong>Grønt område</strong><span>Park, sti eller legeplads</span></span></button>
+                        <button class="option-card" type="button" data-place="En strand eller søbred" aria-pressed="false"><span class="option-icon" aria-hidden="true">≈</span><span class="option-copy"><strong>Strand eller sø</strong><span>Langs vandet</span></span></button>
+                        <button class="option-card" type="button" data-place="Et byområde" aria-pressed="false"><span class="option-icon" aria-hidden="true">⌂</span><span class="option-copy"><strong>Byområde</strong><span>Gade, torv eller skolevej</span></span></button>
+                    </div>
+                    <div class="safety-note"><span class="leaf" aria-hidden="true">✳</span><span><strong>Vælg et trygt sted</strong>Bliv på offentlige stier, og lad voksne håndtere skarpe eller ukendte ting.</span></div>
+                    <div class="panel-actions"><button class="back-button" type="button" data-back>← Tilbage</button><button class="primary-button next-button" type="button" disabled>Se jeres guide <span aria-hidden="true">→</span></button></div>
+                </section>
+
+                <section class="step-panel" id="step-4" aria-labelledby="step-title-4" hidden>
+                    <div class="panel-heading"><h2 id="step-title-4" tabindex="-1">Jeres cleanup-plan er klar!</h2><p>En enkel plan, der hjælper jer godt fra start — og videre til det, I lærer undervejs.</p></div>
+                    <div class="plan-summary">
+                        <div class="summary-cell"><small>Hvem deltager?</small><strong id="summary-group">—</strong></div>
+                        <div class="summary-cell"><small>Hvor lang tid?</small><strong id="summary-duration">—</strong></div>
+                        <div class="summary-cell"><small>Hvor samler I op?</small><strong id="summary-place">—</strong></div>
+                        <div class="summary-cell"><small>Husk</small><strong>Handsker og poser</strong></div>
+                    </div>
+                    <div class="ready-guide"><h3>Jeres lille tjekliste</h3><ul id="checklist"></ul></div>
+                    <p class="privacy-note">Planen laves direkte i browseren. Intet bliver sendt eller gemt.</p>
+                    <div class="next-steps">
+                        <button class="primary-button" id="start-cleanup" type="button">Start Cleanup <span aria-hidden="true">→</span></button>
+                        <div class="celebration-actions" id="celebration-actions" hidden>
+                            <button class="primary-button" id="print-plan" type="button">Print jeres guide <span aria-hidden="true">↗</span></button>
+                            <a class="secondary-button" href="index.html">Tilbage til forsiden <span aria-hidden="true">→</span></a>
+                        </div>
+                    </div>
+                    <p class="celebration-status" id="celebration-status" role="status" aria-live="polite" hidden>Så er I i gang — god cleanup! 🌱</p>
+                    <div class="panel-actions"><button class="back-button" type="button" data-back>← Ret jeres valg</button><button class="back-button" id="restart" type="button">Start forfra ↺</button></div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <a class="footer-brand" href="index.html" aria-label="Plastic Change — tilbage til forsiden"><img src="assets/plastic-change-logo.png" alt="Plastic Change"></a>
+            <nav class="footer-links" aria-label="Sidste navigation"><a href="index.html#top">Forside</a><a href="kommuner-skoleforloeb.html#forloeb">Skoleforløbet</a><a href="viden.html">Viden</a><a href="start-cleanup.html">Start en cleanup</a><a href="stoet-plastic-change.html">Støt Plastic Change</a></nav>
+            <p class="footer-note">Saml · Forstå · Forandre</p>
+        </div>
+    </footer>
+
+    <script>
+        const steps = [...document.querySelectorAll('.step-panel')];
+        const pathDialog = document.querySelector('#path-dialog');
+        const continueFree = document.querySelector('#continue-free');
+        pathDialog.showModal();
+        continueFree.addEventListener('click', (event) => {
+            event.preventDefault();
+            pathDialog.close();
+            document.querySelector('#step-title-1').focus({ preventScroll: true });
+        });
+        const progressItems = [...document.querySelectorAll('.progress li')];
+        const state = { group: '', duration: '', place: '', current: 0 };
+        const groupLabels = { private: 'Privat', education: 'Undervisning', family: 'Familie' };
+
+        function updateProgress() {
+            progressItems.forEach((item, index) => {
+                item.toggleAttribute('aria-current', index === state.current);
+                if (index === state.current) item.setAttribute('aria-current', 'step');
+                else item.removeAttribute('aria-current');
+                item.classList.toggle('is-complete', index < state.current);
+            });
+        }
+
+        function showStep(index) {
+            state.current = Math.max(0, Math.min(index, steps.length - 1));
+            steps.forEach((step, stepIndex) => { step.hidden = stepIndex !== state.current; });
+            updateProgress();
+            steps[state.current].querySelector('h2').focus({ preventScroll: true });
+            document.querySelector('.wizard-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function setChoice(selector, activeButton) {
+            document.querySelectorAll(selector).forEach((button) => {
+                const selected = button === activeButton;
+                button.setAttribute('aria-pressed', String(selected));
+            });
+        }
+
+        document.querySelectorAll('[data-group]').forEach((button) => button.addEventListener('click', () => {
+            if (button.dataset.group === 'education') {
+                window.location.href = 'skole-login.html';
+                return;
+            }
+            state.group = button.dataset.group;
+            setChoice('[data-group]', button);
+            document.querySelector('#step-1 .next-button').disabled = false;
+        }));
+        document.querySelectorAll('[data-duration]').forEach((button) => button.addEventListener('click', () => {
+            state.duration = button.dataset.duration;
+            setChoice('[data-duration]', button);
+            document.querySelector('#step-2 .next-button').disabled = false;
+        }));
+        document.querySelectorAll('[data-place]').forEach((button) => button.addEventListener('click', () => {
+            state.place = button.dataset.place;
+            setChoice('[data-place]', button);
+            document.querySelector('#step-3 .next-button').disabled = false;
+        }));
+
+        document.querySelectorAll('.next-button').forEach((button) => button.addEventListener('click', () => {
+            if (state.current === 2) buildPlan();
+            showStep(state.current + 1);
+        }));
+        document.querySelectorAll('[data-back]').forEach((button) => button.addEventListener('click', () => showStep(state.current - 1)));
+
+        function buildPlan() {
+            document.querySelector('#summary-group').textContent = groupLabels[state.group];
+            document.querySelector('#summary-duration').textContent = state.duration;
+            document.querySelector('#summary-place').textContent = state.place;
+            const checklist = document.querySelector('#checklist');
+            const items = state.group === 'education'
+                ? ['Aftal roller og en voksenansvarlig, før I går ud.', 'Tag handsker og poser med; voksne håndterer skarpe eller ukendte ting.', 'Tal sammen bagefter: Hvad fandt I, og hvad kan I gøre ved kilden?']
+                : state.group === 'family'
+                    ? ['Tag handsker og poser med, og hold jer sammen på turen.', 'Lad en voksen håndtere skarpe eller ukendte ting.', 'Vælg ét fund at tale om, og én lille handling at tage med hjem.']
+                    : ['Vælg en kort rute i dit nærområde, og tag handsker og poser med.', 'Undgå skarpe eller ukendte genstande — lad dem ligge.', 'Læg mærke til ét fund, og vælg én lille handling bagefter.'];
+            checklist.replaceChildren(...items.map((text) => {
+                const item = document.createElement('li');
+                item.textContent = text;
+                return item;
+            }));
+        }
+
+        document.querySelector('#start-cleanup').addEventListener('click', () => {
+            document.querySelector('#start-cleanup').hidden = true;
+            document.querySelector('#celebration-actions').hidden = false;
+            document.querySelector('#celebration-status').hidden = false;
+            launchConfetti();
+        });
+        document.querySelector('#print-plan').addEventListener('click', () => window.print());
+        document.querySelector('#restart').addEventListener('click', () => {
+            Object.assign(state, { group: '', duration: '', place: '' });
+            document.querySelectorAll('.choice-card, [data-duration], [data-place]').forEach((button) => button.setAttribute('aria-pressed', 'false'));
+            document.querySelectorAll('.next-button').forEach((button) => { button.disabled = true; });
+            showStep(0);
+        });
+
+        const menuToggle = document.querySelector('.menu-toggle');
+        const nav = document.querySelector('.nav-links');
+        menuToggle.addEventListener('click', () => {
+            const open = menuToggle.getAttribute('aria-expanded') !== 'true';
+            menuToggle.setAttribute('aria-expanded', String(open));
+            menuToggle.setAttribute('aria-label', open ? 'Luk menu' : 'Åbn menu');
+            nav.classList.toggle('is-open', open);
+        });
+        nav.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
+            nav.classList.remove('is-open');
+            menuToggle.setAttribute('aria-expanded', 'false');
+            menuToggle.setAttribute('aria-label', 'Åbn menu');
+        }));
+
+        function launchConfetti() {
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            const canvas = document.createElement('canvas');
+            canvas.className = 'confetti-canvas';
+            canvas.setAttribute('aria-hidden', 'true');
+            document.body.append(canvas);
+            const context = canvas.getContext('2d');
+            const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+            const colors = ['#ff1054', '#255d94', '#287152', '#ffc857', '#ffffff'];
+            let width = window.innerWidth;
+            let height = window.innerHeight;
+            const resize = () => {
+                width = window.innerWidth;
+                height = window.innerHeight;
+                canvas.width = width * pixelRatio;
+                canvas.height = height * pixelRatio;
+                context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+            };
+            resize();
+            const pieces = Array.from({ length: 125 }, () => ({
+                x: Math.random() * width,
+                y: -Math.random() * height * .8,
+                size: 5 + Math.random() * 7,
+                speed: 2.2 + Math.random() * 4.3,
+                drift: (Math.random() - .5) * 2.8,
+                rotation: Math.random() * Math.PI,
+                spin: (Math.random() - .5) * .17,
+                color: colors[Math.floor(Math.random() * colors.length)]
+            }));
+            const start = performance.now();
+            function draw(now) {
+                const elapsed = now - start;
+                context.clearRect(0, 0, width, height);
+                pieces.forEach((piece) => {
+                    piece.x += piece.drift;
+                    piece.y += piece.speed;
+                    piece.rotation += piece.spin;
+                    context.save();
+                    context.translate(piece.x, piece.y);
+                    context.rotate(piece.rotation);
+                    context.fillStyle = piece.color;
+                    context.fillRect(-piece.size / 2, -piece.size / 2, piece.size, piece.size * .62);
+                    context.restore();
+                });
+                if (elapsed < 3200) requestAnimationFrame(draw);
+                else canvas.remove();
+            }
+            window.addEventListener('resize', resize, { once: true });
+            requestAnimationFrame(draw);
+        }
+
+        const requestedGroup = new URLSearchParams(window.location.search).get('for');
+        const initialGroup = requestedGroup === 'school' ? 'education' : requestedGroup;
+        if (['private', 'education', 'family'].includes(initialGroup)) {
+            const option = document.querySelector(`[data-group="${initialGroup}"]`);
+            option.click();
+        }
+    </script>
+    <script src="assets/site-motion.js" defer></script>
+</body>
+</html>

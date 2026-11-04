@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ff1054">
+    <meta name="description" content="Vær med til at skabe en verden med mindre plastikforurening. En fiktiv støtteoplevelse for Plastic Change.">
+    <title>Støt Plastic Change — World Cleanup Day</title>
+    <style>
+        @font-face { font-family: "Campton"; src: url("assets/fonts/CamptonBook.otf") format("opentype"); font-style: normal; font-weight: 400 500; font-display: swap; }
+        @font-face { font-family: "Campton"; src: url("assets/fonts/CamptonBold.otf") format("opentype"); font-style: normal; font-weight: 600 900; font-display: swap; }
+        @font-face { font-family: "Rubik"; src: url("assets/fonts/Rubik-Regular.ttf") format("truetype"); font-style: normal; font-weight: 400; font-display: swap; }
+        @font-face { font-family: "Rubik"; src: url("assets/fonts/Rubik-Medium.ttf") format("truetype"); font-style: normal; font-weight: 500; font-display: swap; }
+        @font-face { font-family: "Rubik"; src: url("assets/fonts/Rubik-Bold.ttf") format("truetype"); font-style: normal; font-weight: 700 900; font-display: swap; }
+        :root { --pink: #ff1054; --pink-dark: #dc0d4b; --pink-pale: #fff0f4; --ink: #35363f; --muted: #70727e; --line: #e4e5e9; --green: #287152; --green-pale: #eaf4ee; --display: "Campton", sans-serif; --body: "Rubik", sans-serif; }
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { margin: 0; color: var(--ink); background: #fff; font-family: var(--body); line-height: 1.5; }
+        a { color: inherit; }
+        button, input { font: inherit; }
+        a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid #ff8cae; outline-offset: 3px; }
+        .announcement { padding: 9px 20px; color: #fff; background: var(--pink); text-align: center; font-size: .78rem; letter-spacing: .035em; }
+        .header { position: sticky; z-index: 10; top: 0; background: rgba(255,255,255,.97); border-bottom: 1px solid rgba(53,54,63,.09); backdrop-filter: blur(12px); }
+        .nav { display: flex; width: min(1180px, calc(100% - 48px)); height: 78px; align-items: center; justify-content: space-between; gap: 24px; margin: auto; }
+        .logo { display: inline-flex; flex: 0 0 auto; align-items: center; text-decoration: none; }
+        .logo img { display: block; width: 168px; height: auto; }
+        .nav-links { display: flex; align-items: center; gap: clamp(18px, 3vw, 40px); }
+        .nav-links a { font-size: .84rem; font-weight: 700; text-decoration: none; }
+        .nav-links a:hover { color: var(--pink); }
+        .nav-button, .button { display: inline-flex; min-height: 48px; align-items: center; justify-content: center; gap: 10px; padding: 0 21px; border: 0; border-radius: 999px; background: var(--pink); color: #fff !important; font-size: .88rem; font-weight: 800; text-decoration: none; cursor: pointer; transition: transform .18s ease, background .18s ease; }
+        .nav-button { font-size: .88rem; }
+        .button:hover, .nav-button:hover { transform: translateY(-2px); background: var(--pink-dark); }
+        .nav-links a.nav-button:hover { color: #fff; }
+        .menu-toggle { display: none; width: 42px; height: 42px; border: 1px solid var(--line); border-radius: 50%; background: #fff; color: var(--ink); font-size: 1.1rem; }
+        main { position: relative; isolation: isolate; min-height: calc(100vh - 160px); overflow: hidden; }
+        main:before { position: absolute; z-index: -1; inset: 0; background: #fff0f4; content: ""; }
+        .intro { padding: 57px 22px 38px; text-align: center; }
+        .eyebrow { margin: 0 0 10px; color: var(--pink); font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+        h1, h2, h3 { margin-top: 0; font-family: var(--display); }
+        h1 { margin-bottom: 12px; font-size: clamp(2.5rem, 5vw, 4.4rem); font-weight: 700; letter-spacing: -.06em; line-height: 1; }
+        .intro p:last-child { max-width: 570px; margin: 0 auto; color: var(--muted); font-size: 1.02rem; }
+        .donation-layout { display: grid; width: min(1020px, calc(100% - 40px)); grid-template-columns: 1fr .88fr; align-items: stretch; gap: 25px; margin: 0 auto 68px; }
+        .donation-card { padding: clamp(23px, 4vw, 38px); border: 1px solid rgba(228,229,233,.85); border-radius: 19px; background: #fff; box-shadow: 0 17px 48px rgba(53,54,63,.08); }
+        .card-heading { margin-bottom: 21px; }
+        .card-heading h2 { margin-bottom: 5px; font-size: 1.5rem; font-weight: 700; letter-spacing: -.04em; }
+        .card-heading p { margin-bottom: 0; color: var(--muted); font-size: .83rem; }
+        .field-label { display: block; margin-bottom: 10px; font-size: .82rem; font-weight: 700; }
+        .amount-options { display: grid; grid-template-columns: repeat(4, 1fr); gap: 9px; margin-bottom: 20px; }
+        .amount-option { position: relative; }
+        .amount-option input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+        .amount-option span { display: grid; min-height: 48px; place-items: center; border: 1px solid var(--line); border-radius: 9px; background: #fff; font-size: .9rem; font-weight: 700; cursor: pointer; transition: .15s ease; }
+        .amount-option input:checked + span { border-color: var(--pink); background: var(--pink-pale); color: var(--pink); box-shadow: 0 0 0 2px rgba(255,16,84,.09); }
+        .amount-option input:focus-visible + span { outline: 3px solid #ff8cae; outline-offset: 3px; }
+        .custom-amount { display: none; margin: -7px 0 18px; }
+        .custom-amount.is-visible { display: block; }
+        .custom-amount input { width: 100%; min-height: 45px; padding: 0 13px; border: 1px solid var(--line); border-radius: 9px; }
+        .frequency { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px; }
+        .frequency-option { display: flex; min-height: 45px; align-items: center; gap: 9px; padding: 0 13px; border: 1px solid var(--line); border-radius: 9px; font-size: .82rem; cursor: pointer; }
+        .frequency-option:has(input:checked) { border-color: var(--pink); background: var(--pink-pale); }
+        .frequency-option input { accent-color: var(--pink); }
+        .donation-card .button { width: 100%; font-size: .92rem; }
+        .demo-note { display: flex; gap: 9px; margin: 14px 0 0; color: var(--muted); font-size: .72rem; }
+        .demo-note span { color: var(--pink); font-weight: 700; }
+        .story-card { position: relative; display: flex; min-height: 100%; overflow: hidden; flex-direction: column; justify-content: flex-end; padding: 27px; border-radius: 19px; background: #dedbd7; color: #fff; }
+        .story-card img, .story-card video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+        .story-card video { pointer-events: none; }
+        .story-card:after { position: absolute; inset: 25% 0 0; background: linear-gradient(transparent, rgba(21,28,27,.8)); content: ""; }
+        .story-content { position: relative; z-index: 1; }
+        .story-tag { display: inline-flex; margin-bottom: 12px; padding: 6px 10px; border-radius: 99px; background: var(--pink); font-size: .68rem; font-weight: 700; }
+        .story-content h2 { max-width: 390px; margin-bottom: 9px; font-size: clamp(1.65rem, 3vw, 2.25rem); letter-spacing: -.045em; line-height: 1.08; }
+        .story-content p { max-width: 390px; margin: 0; color: rgba(255,255,255,.9); font-size: .83rem; }
+        .success { position: fixed; z-index: 15; inset: 0; display: grid; place-items: center; padding: 24px; background: rgba(53,54,63,.48); backdrop-filter: blur(5px); }
+        .success[hidden] { display: none; }
+        .success-card { width: min(470px, 100%); padding: 38px 30px; border-radius: 22px; background: #fff; box-shadow: 0 24px 80px rgba(0,0,0,.18); text-align: center; animation: pop-in .35s cubic-bezier(.2,.8,.2,1) both; }
+        @keyframes pop-in { from { opacity: 0; transform: translateY(15px) scale(.96); } to { opacity: 1; transform: translateY(0) scale(1); } }
+        .success-icon { display: grid; width: 64px; height: 64px; margin: 0 auto 17px; place-items: center; border-radius: 50%; background: var(--green-pale); color: var(--green); font-size: 1.65rem; }
+        .success-card h2 { margin-bottom: 9px; font-size: 2rem; letter-spacing: -.05em; }
+        .success-card p { margin-bottom: 21px; color: var(--muted); font-size: .9rem; }
+        .success-card .button { min-width: 190px; }
+        .confetti-canvas { position: fixed; z-index: 20; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+        footer { padding: 21px 0; background: #fff; color: var(--ink); border-top: 1px solid var(--line); }
+        .footer-inner { display: flex; width: min(1100px, calc(100% - 40px)); align-items: center; justify-content: space-between; gap: 20px; margin: auto; }
+        .footer-inner img { display: block; width: 138px; height: auto; }
+        .footer-links { display: flex; flex-wrap: wrap; gap: 19px; }
+        .footer-links a { color: var(--muted); font-size: .72rem; text-decoration: none; }
+        .footer-links a:hover { color: var(--pink); }
+        .footer-note { margin: 0; color: var(--muted); font-size: .68rem; }
+        @media (max-width: 800px) {
+            .nav { width: calc(100% - 32px); height: 64px; }
+            .logo img { width: 137px; }
+            .menu-toggle { display: grid; place-items: center; }
+            .nav-links { position: absolute; top: 64px; right: 0; left: 0; display: none; padding: 13px 22px 20px; flex-direction: column; align-items: stretch; gap: 0; border-bottom: 1px solid var(--line); background: #fff; }
+            .nav-links.is-open { display: flex; }
+            .nav-links a { padding: 11px 0; }
+            .nav-links .nav-button { align-self: flex-start; margin-top: 8px; padding: 0 16px; }
+            .intro { padding: 43px 18px 30px; }
+            .donation-layout { grid-template-columns: 1fr; width: min(560px, calc(100% - 28px)); gap: 15px; margin-bottom: 51px; }
+            .story-card { min-height: 330px; }
+            .footer-inner { flex-direction: column; align-items: flex-start; }
+        }
+        @media (max-width: 420px) { .amount-options { grid-template-columns: repeat(2, 1fr); } }
+        @media (prefers-reduced-motion: reduce) { *, *:before, *:after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+    </style>
+    <link rel="stylesheet" href="assets/site-chrome.css">
+</head>
+<body>
+    <div class="announcement"><strong>World Cleanup Day</strong> · Små handlinger. En stor forskel sammen.</div>
+    <header class="site-header">
+        <div class="nav-wrap">
+            <a class="brand" href="index.html#top" aria-label="Plastic Change — tilbage til forsiden"><img src="assets/plastic-change-logo.png" alt="Plastic Change"></a>
+            <button class="menu-toggle" type="button" aria-label="Åbn menu" aria-expanded="false" aria-controls="main-nav">☰</button>
+            <nav class="nav-links" id="main-nav" aria-label="Hovedmenu">
+                <a href="index.html#top">Forside</a>
+                <a href="kommuner-skoleforloeb.html#forloeb">Skoleforløb</a>
+                <a href="viden.html">Viden</a>
+                <a class="button" href="start-cleanup.html">Start en cleanup</a>
+                <a class="button" href="stoet-plastic-change.html">Støt Plastic Change</a>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section class="intro" aria-labelledby="page-title">
+            <p class="eyebrow">Gør en forskel sammen</p>
+            <h1 id="page-title">Støt en verden<br>med mindre plastik.</h1>
+            <p>Din støtte hjælper Plastic Change med at arbejde for mindre plastikforurening — fra ny viden og formidling til handling i naturen.</p>
+        </section>
+        <section class="donation-layout" id="stot" aria-label="Vælg din støtte">
+            <form class="donation-card" id="donation-form">
+                <div class="card-heading"><h2>Vælg dit bidrag</h2><p>Alle bidrag gør en forskel — vælg det, der passer til dig.</p></div>
+                <fieldset style="border:0;padding:0;margin:0">
+                    <legend class="field-label">Hvor meget vil du støtte med?</legend>
+                    <div class="amount-options">
+                        <label class="amount-option"><input type="radio" name="amount" value="50"><span>50 kr.</span></label>
+                        <label class="amount-option"><input type="radio" name="amount" value="100" checked><span>100 kr.</span></label>
+                        <label class="amount-option"><input type="radio" name="amount" value="150"><span>150 kr.</span></label>
+                        <label class="amount-option"><input type="radio" name="amount" value="other"><span>Valgfrit</span></label>
+                    </div>
+                    <div class="custom-amount" id="custom-amount"><label class="field-label" for="amount-input">Skriv et beløb i kroner</label><input id="amount-input" type="number" min="10" max="100000" step="10" placeholder="Fx 200"></div>
+                </fieldset>
+                <fieldset style="border:0;padding:0;margin:0">
+                    <legend class="field-label">Hvordan vil du støtte?</legend>
+                    <div class="frequency">
+                        <label class="frequency-option"><input type="radio" name="frequency" value="engang" checked> Én gang</label>
+                        <label class="frequency-option"><input type="radio" name="frequency" value="maaned"> Hver måned</label>
+                    </div>
+                </fieldset>
+                <button class="button" type="submit">Støt Plastic Change <span aria-hidden="true">→</span></button>
+                <p class="demo-note"><span aria-hidden="true">ⓘ</span><span>Prototype til koncepttest. Knappen gennemfører ikke en rigtig betaling, og dine valg gemmes ikke.</span></p>
+            </form>
+            <aside class="story-card" aria-label="Plastic Change arbejder for mindre plastikforurening">
+                <video autoplay muted loop playsinline preload="auto" poster="assets/community.jpg" aria-label="Lydløs video af havet"><source src="plasticocean.mp4" type="video/mp4">Din browser understøtter ikke videoafspilning.</video>
+                <div class="story-content"><span class="story-tag">Sammen mod plastikforurening</span><h2>En renere fremtid skaber vi sammen.</h2><p>Din støtte kan være med til at holde viden, engagement og handling i bevægelse.</p></div>
+            </aside>
+        </section>
+        <section class="success" id="success" role="dialog" aria-modal="true" aria-labelledby="success-title" aria-describedby="success-message" hidden>
+            <div class="success-card">
+                <span class="success-icon" aria-hidden="true">✓</span>
+                <h2 id="success-title">Tusind tak!</h2>
+                <p id="success-message" role="status" aria-live="polite">Tak fordi du vil være med til at skabe forandring.</p>
+                <button class="button" id="close-success" type="button">Tilbage til siden</button>
+            </div>
+        </section>
+    </main>
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <a class="footer-brand" href="index.html" aria-label="Plastic Change — tilbage til forsiden"><img src="assets/plastic-change-logo.png" alt="Plastic Change"></a>
+            <nav class="footer-links" aria-label="Sidste navigation"><a href="index.html#top">Forside</a><a href="kommuner-skoleforloeb.html#forloeb">Skoleforløbet</a><a href="viden.html">Viden</a><a href="start-cleanup.html">Start en cleanup</a><a href="stoet-plastic-change.html">Støt Plastic Change</a></nav>
+            <p class="footer-note">Saml · Forstå · Forandre</p>
+        </div>
+    </footer>
+    <script>
+        const form = document.querySelector('#donation-form');
+        const customAmount = document.querySelector('#custom-amount');
+        const amountInput = document.querySelector('#amount-input');
+        const success = document.querySelector('#success');
+        const closeSuccess = document.querySelector('#close-success');
+        let previousFocus;
+
+        document.querySelectorAll('input[name="amount"]').forEach((input) => input.addEventListener('change', () => {
+            const isCustom = input.value === 'other' && input.checked;
+            customAmount.classList.toggle('is-visible', isCustom);
+            amountInput.required = isCustom;
+            if (isCustom) amountInput.focus();
+        }));
+        amountInput.addEventListener('input', () => amountInput.setCustomValidity(''));
+
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const selected = form.querySelector('input[name="amount"]:checked').value;
+            const amount = selected === 'other' ? Number(amountInput.value) : Number(selected);
+            const frequency = form.querySelector('input[name="frequency"]:checked').value;
+            if (!Number.isFinite(amount) || amount < 10 || amount > 100000) {
+                amountInput.setCustomValidity('Vælg et beløb mellem 10 og 100.000 kr.');
+                amountInput.reportValidity();
+                return;
+            }
+            amountInput.setCustomValidity('');
+            previousFocus = document.activeElement;
+            document.querySelector('#success-message').textContent = `Tak for dit fiktive tilsagn på ${amount} kr${frequency === 'maaned' ? ' om måneden' : ''}. I denne prototype gennemføres ingen betaling.`;
+            success.hidden = false;
+            closeSuccess.focus();
+            launchConfetti();
+        });
+
+        function closeDialog() {
+            success.hidden = true;
+            if (previousFocus) previousFocus.focus();
+        }
+        closeSuccess.addEventListener('click', closeDialog);
+        success.addEventListener('click', (event) => { if (event.target === success) closeDialog(); });
+        document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && !success.hidden) closeDialog(); });
+
+        function launchConfetti() {
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            const canvas = document.createElement('canvas');
+            canvas.className = 'confetti-canvas';
+            canvas.setAttribute('aria-hidden', 'true');
+            document.body.append(canvas);
+            const context = canvas.getContext('2d');
+            const ratio = Math.min(window.devicePixelRatio || 1, 2);
+            let width = window.innerWidth;
+            let height = window.innerHeight;
+            const colors = ['#ff1054', '#35363f', '#287152', '#f7c948', '#fff'];
+            const resize = () => {
+                width = window.innerWidth;
+                height = window.innerHeight;
+                canvas.width = width * ratio;
+                canvas.height = height * ratio;
+                context.setTransform(ratio, 0, 0, ratio, 0, 0);
+            };
+            resize();
+            const pieces = Array.from({ length: 125 }, () => ({ x: Math.random() * width, y: -Math.random() * height, size: 5 + Math.random() * 7, speed: 2 + Math.random() * 4, drift: (Math.random() - .5) * 2.7, angle: Math.random() * Math.PI, spin: (Math.random() - .5) * .16, color: colors[Math.floor(Math.random() * colors.length)] }));
+            const start = performance.now();
+            function draw(now) {
+                context.clearRect(0, 0, width, height);
+                pieces.forEach((piece) => {
+                    piece.x += piece.drift;
+                    piece.y += piece.speed;
+                    piece.angle += piece.spin;
+                    context.save();
+                    context.translate(piece.x, piece.y);
+                    context.rotate(piece.angle);
+                    context.fillStyle = piece.color;
+                    context.fillRect(-piece.size / 2, -piece.size / 2, piece.size, piece.size * .65);
+                    context.restore();
+                });
+                if (now - start < 3400) requestAnimationFrame(draw);
+                else canvas.remove();
+            }
+            requestAnimationFrame(draw);
+        }
+
+        const menuToggle = document.querySelector('.menu-toggle');
+        const nav = document.querySelector('.nav-links');
+        menuToggle.addEventListener('click', () => {
+            const open = menuToggle.getAttribute('aria-expanded') !== 'true';
+            menuToggle.setAttribute('aria-expanded', String(open));
+            menuToggle.setAttribute('aria-label', open ? 'Luk menu' : 'Åbn menu');
+            nav.classList.toggle('is-open', open);
+        });
+        nav.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
+            nav.classList.remove('is-open');
+            menuToggle.setAttribute('aria-expanded', 'false');
+            menuToggle.setAttribute('aria-label', 'Åbn menu');
+        }));
+    </script>
+    <script src="assets/site-motion.js" defer></script>
+</body>
+</html>

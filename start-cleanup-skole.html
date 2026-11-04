@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ff1054">
+    <meta name="description" content="Lav en enkel cleanup-plan til klassen, og hent lærerens skolematerialer til World Cleanup Day.">
+    <title>Planlæg klassens cleanup — Plastic Change</title>
+    <style>
+        @font-face { font-family:"Campton"; src:url("assets/fonts/CamptonBook.otf") format("opentype"); font-weight:400 500; font-display:swap; }
+        @font-face { font-family:"Campton"; src:url("assets/fonts/CamptonBold.otf") format("opentype"); font-weight:600 900; font-display:swap; }
+        @font-face { font-family:"Rubik"; src:url("assets/fonts/Rubik-Regular.ttf") format("truetype"); font-weight:400; font-display:swap; }
+        @font-face { font-family:"Rubik"; src:url("assets/fonts/Rubik-Medium.ttf") format("truetype"); font-weight:500; font-display:swap; }
+        @font-face { font-family:"Rubik"; src:url("assets/fonts/Rubik-Bold.ttf") format("truetype"); font-weight:700 900; font-display:swap; }
+        :root { --pink:#ff1054; --pink-dark:#df0e4b; --pink-pale:#fff0f4; --ink:#35363f; --muted:#70727e; --line:#e4e5e9; --green:#287152; --green-pale:#eaf4ee; --paper:#fbfbfc; --display:"Campton",sans-serif; --body:"Rubik",sans-serif; }
+        * { box-sizing:border-box; }
+        html { scroll-behavior:smooth; scroll-padding-top:95px; }
+        body { margin:0; background:var(--paper); color:var(--ink); font-family:var(--body); line-height:1.5; }
+        a { color:inherit; }
+        button,input,select { font:inherit; }
+        a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible { outline:3px solid #ff8cae; outline-offset:3px; }
+        .announcement { padding:8px 18px; background:var(--pink); color:#fff; text-align:center; font-size:.74rem; }
+        .header { position:sticky; z-index:10; top:0; background:rgba(255,255,255,.97); border-bottom:1px solid rgba(53,54,63,.09); backdrop-filter:blur(12px); }
+        .nav { display:flex; width:min(1120px,calc(100% - 40px)); height:70px; align-items:center; justify-content:space-between; margin:auto; }
+        .logo img { display:block; width:145px; height:auto; }
+        .nav-back { color:var(--muted); font-size:.82rem; font-weight:600; text-decoration:none; }
+        .nav-back:hover { color:var(--pink); }
+        main { min-height:calc(100vh - 150px); padding:45px 20px 70px; background:linear-gradient(180deg,#fff8f9 0,#fbfbfc 360px); }
+        .wrap { width:min(930px,100%); margin:auto; }
+        .page-heading { max-width:700px; margin:0 auto 25px; text-align:center; }
+        .eyebrow { margin:0 0 10px; color:var(--pink); font-size:.72rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; }
+        h1,h2,h3 { margin-top:0; font-family:var(--display); }
+        h1 { margin-bottom:9px; font-size:clamp(2.15rem,5vw,3.2rem); letter-spacing:-.06em; line-height:1.02; }
+        .page-heading p:last-child { margin:0; color:var(--muted); font-size:.92rem; }
+        .progress { display:grid; max-width:580px; grid-template-columns:repeat(3,1fr); margin:0 auto 21px; padding:0; list-style:none; }
+        .progress li { position:relative; display:grid; justify-items:center; gap:6px; color:#858591; font-size:.7rem; }
+        .progress li:not(:last-child):after { position:absolute; top:14px; left:calc(50% + 19px); width:calc(100% - 38px); height:2px; background:#e2e3e8; content:""; }
+        .progress li.done:not(:last-child):after { background:var(--pink); }
+        .step-number { position:relative; z-index:1; display:grid; width:30px; height:30px; place-items:center; border:2px solid #dddfe5; border-radius:50%; background:#fff; font-weight:800; }
+        .progress li[aria-current="step"] { color:var(--ink); font-weight:700; }
+        .progress li[aria-current="step"] .step-number,.progress li.done .step-number { border-color:var(--pink); background:var(--pink); color:#fff; }
+        .panel { padding:clamp(22px,4vw,37px); border:1px solid var(--line); border-radius:18px; background:#fff; box-shadow:0 15px 40px rgba(53,54,63,.07); }
+        .panel h2 { margin-bottom:5px; font-size:1.45rem; letter-spacing:-.04em; }
+        .panel-intro { margin:0 0 21px; color:var(--muted); font-size:.84rem; }
+        .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:15px; }
+        .field label { display:block; margin-bottom:6px; font-size:.78rem; font-weight:700; }
+        .field input,.field select { width:100%; min-height:47px; padding:0 12px; border:1px solid var(--line); border-radius:9px; background:#fff; color:var(--ink); }
+        .field input:focus,.field select:focus { border-color:var(--pink); }
+        .form-actions { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:22px; }
+        .button { display:inline-flex; min-height:47px; align-items:center; justify-content:center; gap:9px; padding:0 20px; border:0; border-radius:9px; background:var(--pink); color:#fff; font-size:.85rem; font-weight:800; text-decoration:none; cursor:pointer; }
+        .button:hover { background:var(--pink-dark); }
+        .button-light { border:1px solid var(--line); background:#fff; color:var(--ink); }
+        .button-light:hover { background:var(--pink-pale); }
+        .privacy { margin:14px 0 0; color:var(--muted); font-size:.7rem; }
+        #plan-result[hidden] { display:none; }
+        #plan-result { margin-top:26px; scroll-margin-top:100px; }
+        .result-top { display:flex; flex-wrap:wrap; align-items:flex-start; justify-content:space-between; gap:16px; margin-bottom:19px; }
+        .result-top h2 { margin-bottom:5px; font-size:clamp(1.7rem,4vw,2.3rem); letter-spacing:-.05em; }
+        .result-top p { margin:0; color:var(--muted); font-size:.82rem; }
+        .plan-summary { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:17px; }
+        .summary-item { padding:14px; border-radius:10px; background:#f7f7f9; }
+        .summary-item small { display:block; margin-bottom:3px; color:var(--muted); font-size:.69rem; }
+        .summary-item strong { font-size:.85rem; }
+        .ready-panel { padding:20px; border:1px solid #d9e9df; border-radius:13px; background:#f4f8f5; }
+        .ready-panel h3 { margin-bottom:10px; font-size:1.08rem; }
+        .ready-panel ul { display:grid; gap:8px; margin:0; padding:0; list-style:none; }
+        .ready-panel li { display:flex; gap:9px; font-size:.8rem; }
+        .ready-panel li:before { color:var(--green); content:"✓"; font-weight:900; }
+        .materials { margin-top:27px; }
+        .materials-heading { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:end; gap:10px; margin-bottom:14px; }
+        .materials-heading h2 { margin:0 0 3px; font-size:1.55rem; letter-spacing:-.04em; }
+        .materials-heading p { margin:0; color:var(--muted); font-size:.8rem; }
+        .material-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; }
+        .material-card { display:flex; min-height:150px; flex-direction:column; align-items:flex-start; padding:18px; border:1px solid var(--line); border-radius:13px; background:#fff; }
+        .material-type { margin-bottom:9px; color:var(--pink); font-size:.68rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
+        .material-card h3 { margin-bottom:5px; font-size:1.02rem; }
+        .material-card p { margin:0 0 15px; color:var(--muted); font-size:.76rem; }
+        .download { display:inline-flex; gap:7px; align-items:center; margin-top:auto; color:var(--pink); font-size:.78rem; font-weight:800; text-decoration:none; }
+        .download:hover { text-decoration:underline; }
+        .footer { padding:20px; border-top:1px solid var(--line); background:#fff; text-align:center; }
+        .footer a { color:var(--muted); font-size:.75rem; text-decoration:none; }
+        @media(max-width:650px) { main { padding:32px 14px 50px; } .form-grid,.material-grid { grid-template-columns:1fr; } .plan-summary { grid-template-columns:1fr 1fr; } .form-actions { align-items:stretch; flex-direction:column-reverse; } .form-actions .button { width:100%; } }
+        @media(prefers-reduced-motion:reduce) { *,*:before,*:after { scroll-behavior:auto!important; transition-duration:.01ms!important; } }
+    </style>
+    <link rel="stylesheet" href="assets/site-chrome.css">
+</head>
+<body>
+    <div class="announcement"><strong>World Cleanup Day</strong> · Små handlinger. En stor forskel sammen.</div>
+    <header class="site-header"><div class="nav-wrap"><a class="brand" href="index.html#top" aria-label="Plastic Change — forsiden"><img src="assets/plastic-change-logo.png" alt="Plastic Change"></a><button class="menu-toggle" type="button" aria-label="Åbn menu" aria-expanded="false" aria-controls="main-nav">☰</button><nav class="nav-links" id="main-nav" aria-label="Hovedmenu"><a href="index.html#top">Forside</a><a href="kommuner-skoleforloeb.html#forloeb">Skoleforløb</a><a href="viden.html">Viden</a><a class="button" href="start-cleanup.html">Start en cleanup</a><a class="button" href="stoet-plastic-change.html">Støt Plastic Change</a></nav></div></header>
+    <main>
+        <div class="wrap">
+            <header class="page-heading"><p class="eyebrow">Lærerens planlægning</p><h1>Planlæg klassens cleanup</h1><p>Et par valg giver jer en enkel plan. Bagefter kan du hente materialer til før, under og efter turen.</p></header>
+            <ol class="progress" aria-label="Planlægningens trin"><li aria-current="step"><span class="step-number">1</span><span>Jeres klasse</span></li><li><span class="step-number">2</span><span>Cleanup-plan</span></li><li><span class="step-number">3</span><span>Materialer</span></li></ol>
+            <form class="panel" id="school-plan-form">
+                <h2>Fortæl lidt om forløbet</h2><p class="panel-intro">Felterne bruges kun til at lave planen i denne browser. Oplysningerne bliver ikke gemt eller sendt.</p>
+                <div class="form-grid">
+                    <div class="field"><label for="school">Skole</label><input id="school" name="school" type="text" placeholder="Fx Søndermarkskolen" required maxlength="80"></div>
+                    <div class="field"><label for="class-name">Klasse eller gruppe</label><input id="class-name" name="className" type="text" placeholder="Fx 5.B" required maxlength="40"></div>
+                    <div class="field"><label for="age-group">Klassetrin</label><select id="age-group" name="ageGroup" required><option value="" selected disabled>Vælg klassetrin</option><option>0.–2. klasse</option><option>3.–5. klasse</option><option>6.–7. klasse</option><option>8.–10. klasse</option></select></div>
+                    <div class="field"><label for="duration">Tid til forløbet</label><select id="duration" name="duration" required><option value="" selected disabled>Vælg varighed</option><option>Ca. 30 minutter</option><option>Ca. 45 minutter</option><option>Ca. 60 minutter</option><option>Et længere undervisningsforløb</option></select></div>
+                    <div class="field"><label for="area">Hvor vil I undersøge?</label><select id="area" name="area" required><option value="" selected disabled>Vælg område</option><option>Skolens område</option><option>En park eller et grønt område</option><option>Et byområde</option><option>En strand eller søbred</option><option>Vi vælger område senere</option></select></div>
+                    <div class="field"><label for="focus">Hvad vil I især undersøge?</label><select id="focus" name="focus"><option>Hvilke typer affald går igen?</option><option>Hvor kan affaldet komme fra?</option><option>Hvordan kan vi forebygge affald?</option><option>Elevernes egne spørgsmål</option></select></div>
+                </div>
+                <div class="form-actions"><a class="button button-light" href="kommuner-skoleforloeb.html">Om skoleforløbet</a><button class="button" type="submit">Lav klassens plan <span aria-hidden="true">→</span></button></div>
+                <p class="privacy">Demo: Ingen loginoplysninger eller planoplysninger gemmes. Materialerne kan hentes uden at oprette en konto.</p>
+            </form>
+            <section id="plan-result" class="panel" aria-labelledby="result-title" hidden>
+                <div class="result-top"><div><p class="eyebrow">Jeres forslag</p><h2 id="result-title" tabindex="-1">Klassens cleanup-plan er klar</h2><p id="plan-description">Her er et udgangspunkt, som læreren kan tilpasse.</p></div><button class="button button-light" id="edit-plan" type="button">Ret planen</button></div>
+                <div class="plan-summary"><div class="summary-item"><small>Skole og klasse</small><strong id="summary-class"></strong></div><div class="summary-item"><small>Klassetrin</small><strong id="summary-age"></strong></div><div class="summary-item"><small>Tid</small><strong id="summary-duration"></strong></div><div class="summary-item"><small>Område</small><strong id="summary-area"></strong></div><div class="summary-item"><small>Undersøgelsesspørgsmål</small><strong id="summary-focus"></strong></div><div class="summary-item"><small>Husk</small><strong>Voksenansvar og handsker</strong></div></div>
+                <div class="ready-panel"><h3>Før I går ud</h3><ul><li>Aftal rute, roller, mødepunkt og voksenansvar.</li><li>Gennemgå sikkerhed: lad skarpe eller ukendte ting ligge, og hent en voksen.</li><li>Undervejs observerer I; bagefter taler I om fund og mulige handlinger.</li></ul></div>
+                <div class="materials" id="materials">
+                    <div class="materials-heading"><div><p class="eyebrow">Klar til undervisningen</p><h2>Hent skolematerialer</h2><p>Download, print og tilpas materialerne til jeres klassetrin og lokale regler.</p></div></div>
+                    <div class="material-grid">
+                        <article class="material-card"><span class="material-type">Til læreren · vejledning</span><h3>Lærervejledning</h3><p>Forslag til aktiviteter før, under og efter cleanupen samt refleksionsspørgsmål.</p><a class="download" href="materialer/laerervejledning.txt" download>Hent lærervejledning <span aria-hidden="true">↓</span></a></article>
+                        <article class="material-card"><span class="material-type">Til eleverne · arbejdsark</span><h3>Elevark: Fra fund til forandring</h3><p>Et printvenligt ark til observationer, spørgsmål og klassens næste handling.</p><a class="download" href="materialer/elevark-fra-fund-til-forandring.txt" download>Hent elevark <span aria-hidden="true">↓</span></a></article>
+                        <article class="material-card"><span class="material-type">Før turen · sikkerhed</span><h3>Sikkerhedstjek</h3><p>Tjekliste til planlægning, turen og opfølgning. Følg altid skolens egne regler.</p><a class="download" href="materialer/sikkerhedstjek-cleanup.txt" download>Hent sikkerhedstjek <span aria-hidden="true">↓</span></a></article>
+                        <article class="material-card"><span class="material-type">Efter turen · opfølgning</span><h3>Klassens handlingsplan</h3><p>Hjælp eleverne med at vælge en lille, realistisk handling og følge op på den.</p><a class="download" href="materialer/klassens-handlingsplan.txt" download>Hent handlingsplan <span aria-hidden="true">↓</span></a></article>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    <footer class="site-footer"><div class="footer-inner"><a class="footer-brand" href="index.html" aria-label="Plastic Change — forsiden"><img src="assets/plastic-change-logo.png" alt="Plastic Change"></a><nav class="footer-links" aria-label="Sidste navigation"><a href="index.html#top">Forside</a><a href="kommuner-skoleforloeb.html#forloeb">Skoleforløbet</a><a href="viden.html">Viden</a><a href="start-cleanup.html">Start en cleanup</a><a href="stoet-plastic-change.html">Støt Plastic Change</a></nav><p class="footer-note">Saml · Forstå · Forandre</p></div></footer>
+    <script>
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navigation = document.querySelector('.nav-links');
+        menuToggle.addEventListener('click', () => {
+            const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
+            menuToggle.setAttribute('aria-expanded', String(!isOpen));
+            menuToggle.setAttribute('aria-label', isOpen ? 'Åbn menu' : 'Luk menu');
+            navigation.classList.toggle('is-open', !isOpen);
+        });
+        navigation.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
+            navigation.classList.remove('is-open');
+            menuToggle.setAttribute('aria-expanded', 'false');
+            menuToggle.setAttribute('aria-label', 'Åbn menu');
+        }));
+        const planForm = document.querySelector('#school-plan-form');
+        const result = document.querySelector('#plan-result');
+        const progress = [...document.querySelectorAll('.progress li')];
+        function setProgress(step) {
+            progress.forEach((item, index) => {
+                item.classList.toggle('done', index < step);
+                if (index === step) item.setAttribute('aria-current', 'step');
+                else item.removeAttribute('aria-current');
+            });
+        }
+        planForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const data = new FormData(planForm);
+            document.querySelector('#summary-class').textContent = `${data.get('school')} · ${data.get('className')}`;
+            document.querySelector('#summary-age').textContent = data.get('ageGroup');
+            document.querySelector('#summary-duration').textContent = data.get('duration');
+            document.querySelector('#summary-area').textContent = data.get('area');
+            document.querySelector('#summary-focus').textContent = data.get('focus');
+            document.querySelector('#plan-description').textContent = `Et forslag til ${data.get('className')} på ${data.get('area').toLowerCase()}. Tilpas det til klassens behov og skolens sikkerhedsregler.`;
+            result.hidden = false;
+            setProgress(2);
+            result.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            document.querySelector('#result-title').focus({ preventScroll: true });
+        });
+        document.querySelector('#edit-plan').addEventListener('click', () => {
+            result.hidden = true;
+            setProgress(0);
+            planForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            document.querySelector('#school').focus({ preventScroll: true });
+        });
+    </script>
+    <script src="assets/site-motion.js" defer></script>
+</body>
+</html>
