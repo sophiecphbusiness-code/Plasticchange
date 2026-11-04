@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ff1054">
+    <meta name="description" content="Giv skoler i kommunen et konkret læringsforløb om plastik, affald og handling. Se indholdet og kontakt Plastic Change om en kommunal løsning.">
+    <title>Skoleforløb for kommuner — Plastic Change</title>
+    <style>
+        @font-face { font-family: "Campton"; src: url("assets/fonts/CamptonBook.otf") format("opentype"); font-style: normal; font-weight: 400 500; font-display: swap; }
+        @font-face { font-family: "Campton"; src: url("assets/fonts/CamptonBold.otf") format("opentype"); font-style: normal; font-weight: 600 900; font-display: swap; }
+        @font-face { font-family: "Rubik"; src: url("assets/fonts/Rubik-Regular.ttf") format("truetype"); font-style: normal; font-weight: 400; font-display: swap; }
+        @font-face { font-family: "Rubik"; src: url("assets/fonts/Rubik-Medium.ttf") format("truetype"); font-style: normal; font-weight: 500; font-display: swap; }
+        @font-face { font-family: "Rubik"; src: url("assets/fonts/Rubik-Bold.ttf") format("truetype"); font-style: normal; font-weight: 700 900; font-display: swap; }
+        :root { --pink:#ff1054; --pink-dark:#df0e4b; --pink-pale:#fff0f4; --ink:#35363f; --muted:#70727e; --line:#e5e5e9; --green:#287152; --green-pale:#eaf4ee; --paper:#fbfbfc; --display:"Campton",sans-serif; --body:"Rubik",sans-serif; }
+        * { box-sizing:border-box; }
+        html { scroll-behavior:smooth; scroll-padding-top:100px; }
+        body { margin:0; background:var(--paper); color:var(--ink); font-family:var(--body); line-height:1.55; }
+        a { color:inherit; }
+        button { font:inherit; }
+        a:focus-visible,button:focus-visible,summary:focus-visible { outline:3px solid #ff8cae; outline-offset:3px; }
+        .announcement { padding:8px 18px; background:var(--pink); color:#fff; text-align:center; font-size:.74rem; }
+        .header { position:sticky; z-index:10; top:0; background:rgba(255,255,255,.97); border-bottom:1px solid rgba(53,54,63,.09); backdrop-filter:blur(12px); }
+        .nav { display:flex; width:min(1180px,calc(100% - 48px)); height:74px; align-items:center; justify-content:space-between; gap:24px; margin:auto; }
+        .logo img { display:block; width:158px; height:auto; }
+        .nav-links { display:flex; align-items:center; gap:clamp(16px,2.5vw,32px); }
+        .nav-links a { font-size:.82rem; font-weight:700; text-decoration:none; }
+        .nav-links a:not(.button):hover { color:var(--pink); }
+        .button { display:inline-flex; min-height:48px; align-items:center; justify-content:center; gap:10px; padding:0 21px; border:0; border-radius:10px; background:var(--pink); color:#fff!important; font-size:.88rem; font-weight:800; text-decoration:none; cursor:pointer; transition:transform .18s ease,background .18s ease; }
+        .button:hover { transform:translateY(-2px); background:var(--pink-dark); }
+        .button-light { border:1px solid var(--line); background:#fff; color:var(--ink)!important; }
+        .button-light:hover { background:var(--pink-pale); }
+        .menu-toggle { display:none; width:44px; height:44px; border:1px solid var(--line); border-radius:50%; background:#fff; color:var(--ink); cursor:pointer; }
+        .wrap { width:min(1120px,calc(100% - 48px)); margin:auto; }
+        .eyebrow { margin:0 0 12px; color:var(--pink); font-size:.72rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; }
+        h1,h2,h3 { margin-top:0; font-family:var(--display); }
+        h1 { max-width:710px; margin-bottom:18px; font-size:clamp(2.7rem,4.4vw,4rem); letter-spacing:-.065em; line-height:.99; }
+        h1 em { color:var(--pink); font-style:normal; }
+        h2 { margin-bottom:12px; font-size:clamp(2rem,4vw,3.2rem); letter-spacing:-.05em; line-height:1.05; }
+        h3 { margin-bottom:8px; font-size:1.16rem; letter-spacing:-.03em; }
+        .hero { position:relative; display:grid; min-height:550px; grid-template-columns:1.02fr .98fr; align-items:center; gap:44px; padding:60px max(24px,calc((100% - 1120px)/2)); overflow:hidden; background:linear-gradient(105deg,#fff0f4 0%,#fff8f9 58%,#f7f8f7 100%); }
+        .hero-copy { max-width:600px; margin-bottom:24px; color:#565965; font-size:1.06rem; }
+        .hero-actions { display:flex; flex-wrap:wrap; gap:11px; }
+        .reassurance { display:flex; flex-wrap:wrap; gap:10px 18px; margin:22px 0 0; padding:0; list-style:none; color:#575a64; font-size:.76rem; }
+        .reassurance li:before { margin-right:7px; color:var(--green); content:"✓"; font-weight:900; }
+        .hero-image { position:relative; min-height:385px; overflow:hidden; border-radius:22px 22px 22px 80px; background:#e9eeee; box-shadow:0 18px 45px rgba(53,54,63,.12); }
+        .hero-image img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+        .image-note { position:absolute; right:16px; bottom:16px; left:16px; padding:15px 17px; border-radius:12px; background:rgba(255,255,255,.96); font-size:.79rem; }
+        .image-note strong { display:block; margin-bottom:2px; }
+        .section { padding:88px 0; }
+        .section-heading { max-width:700px; margin-bottom:32px; }
+        .section-heading p:last-child { margin:0; color:var(--muted); }
+        .benefits { display:grid; grid-template-columns:repeat(3,1fr); gap:15px; }
+        .benefit { min-height:205px; padding:24px; border:1px solid var(--line); border-radius:15px; background:#fff; }
+        .icon { display:grid; width:42px; height:42px; margin-bottom:17px; place-items:center; border-radius:13px; background:var(--pink-pale); color:var(--pink); font-size:1.25rem; font-weight:700; }
+        .benefit p { margin:0; color:var(--muted); font-size:.85rem; }
+        .program { background:#fff; }
+        .program-layout { display:grid; grid-template-columns:.9fr 1.1fr; align-items:center; gap:55px; }
+        .program-image { position:relative; min-height:410px; overflow:hidden; border-radius:18px 90px 18px 18px; background:#e9eeee; }
+        .program-image img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+        .program-list { display:grid; gap:13px; margin:24px 0 27px; padding:0; list-style:none; }
+        .program-list li { display:flex; gap:11px; align-items:flex-start; font-size:.88rem; }
+        .program-list li:before { display:grid; flex:0 0 21px; height:21px; place-items:center; margin-top:1px; border-radius:50%; background:var(--green-pale); color:var(--green); content:"✓"; font-size:.72rem; font-weight:900; }
+        .steps { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; counter-reset:step; }
+        .step { padding:22px; border:1px solid #f2d3dc; border-top:4px solid var(--pink); border-radius:14px; background:var(--pink-pale); counter-increment:step; }
+        .step:before { display:block; margin-bottom:13px; color:var(--pink); content:"0" counter(step); font-size:.75rem; font-weight:800; letter-spacing:.1em; }
+        .step p { margin:0; color:var(--muted); font-size:.82rem; }
+        .budget { padding:0 0 88px; }
+        .budget-card { display:grid; grid-template-columns:1fr auto; align-items:center; gap:30px; padding:clamp(25px,4vw,44px); border:1px solid #f2d3dc; border-radius:18px; background:linear-gradient(110deg,#fff0f4,#fff9fa); }
+        .budget-card p { max-width:680px; margin:0; color:var(--muted); font-size:.9rem; }
+        .budget-card .eyebrow { margin-bottom:9px; }
+        .faq { background:#fff; }
+        .faq-list { display:grid; max-width:850px; gap:10px; }
+        details { border:1px solid var(--line); border-radius:12px; background:#fff; }
+        summary { position:relative; padding:17px 48px 17px 18px; font-size:.9rem; font-weight:700; cursor:pointer; list-style:none; }
+        summary::-webkit-details-marker { display:none; }
+        summary:after { position:absolute; top:50%; right:19px; color:var(--pink); content:"+"; font-size:1.35rem; transform:translateY(-50%); }
+        details[open] summary:after { content:"−"; }
+        details p { margin:0; padding:0 18px 18px; color:var(--muted); font-size:.84rem; }
+        .closing { padding:70px 20px; background:var(--pink); color:#fff; text-align:center; }
+        .closing h2 { margin-bottom:10px; }
+        .closing p { max-width:650px; margin:0 auto 22px; color:rgba(255,255,255,.92); }
+        .closing .button { background:#fff; color:var(--pink)!important; }
+        .closing .button:hover { background:var(--pink-pale); }
+        footer { padding:26px 0; border-top:1px solid var(--line); background:#fff; }
+        .footer-inner { display:flex; align-items:center; justify-content:space-between; gap:20px; }
+        .footer-inner img { width:138px; height:auto; }
+        .footer-links { display:flex; flex-wrap:wrap; gap:18px; }
+        .footer-links a { color:var(--muted); font-size:.75rem; text-decoration:none; }
+        .footer-links a:hover { color:var(--pink); }
+        .footer-note { margin:0; color:var(--muted); font-size:.7rem; }
+        @media(max-width:800px) {
+            .nav { width:calc(100% - 32px); height:64px; }
+            .logo img { width:137px; }
+            .menu-toggle { display:grid; place-items:center; }
+            .nav-links { position:absolute; top:64px; right:0; left:0; display:none; padding:13px 22px 20px; flex-direction:column; align-items:stretch; gap:0; border-bottom:1px solid var(--line); background:#fff; }
+            .nav-links.is-open { display:flex; }
+            .nav-links a { padding:11px 0; }
+            .nav-links .button { align-self:flex-start; margin-top:8px; padding:0 17px; }
+            .hero { min-height:0; grid-template-columns:1fr; gap:28px; padding:42px 24px 55px; }
+            .hero-image { min-height:320px; }
+            .section { padding:65px 0; }
+            .benefits,.steps { grid-template-columns:1fr; }
+            .benefit { min-height:0; }
+            .program-layout { grid-template-columns:1fr; gap:28px; }
+            .program-image { min-height:320px; }
+            .budget-card { grid-template-columns:1fr; gap:20px; }
+            .budget-card .button { justify-self:start; }
+            .footer-inner { flex-direction:column; align-items:flex-start; }
+        }
+        @media(max-width:460px) {
+            .announcement { font-size:.66rem; }
+            .wrap { width:calc(100% - 32px); }
+            .hero { padding-right:16px; padding-left:16px; }
+            h1 { font-size:clamp(2.55rem,12vw,3.5rem); }
+            .hero-actions { align-items:stretch; flex-direction:column; }
+            .hero-actions .button { width:100%; }
+            .hero-image { min-height:270px; }
+            .footer-links { gap:13px; }
+        }
+        @media(prefers-reduced-motion:reduce) { *,*:before,*:after { scroll-behavior:auto!important; transition-duration:.01ms!important; } }
+    </style>
+    <link rel="stylesheet" href="assets/site-chrome.css">
+</head>
+<body>
+    <div class="announcement"><strong>World Cleanup Day</strong> · Sammen skaber vi forandring</div>
+    <header class="site-header">
+        <div class="nav-wrap">
+            <a class="brand" href="index.html#top" aria-label="Plastic Change — tilbage til forsiden"><img src="assets/plastic-change-logo.png" alt="Plastic Change"></a>
+            <button class="menu-toggle" type="button" aria-label="Åbn menu" aria-expanded="false" aria-controls="main-nav">☰</button>
+            <nav class="nav-links" id="main-nav" aria-label="Hovedmenu">
+                <a href="index.html#top">Forside</a>
+                <a href="kommuner-skoleforloeb.html#forloeb">Skoleforløb</a>
+                <a href="viden.html">Viden</a>
+                <a class="button" href="start-cleanup.html">Start en cleanup</a>
+                <a class="button" href="stoet-plastic-change.html">Støt Plastic Change</a>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section class="hero" aria-labelledby="page-title">
+            <div>
+                <p class="eyebrow">Til kommuner · Skoleforløb</p>
+                <h1 id="page-title">Gør cleanup til <em>læring i hele kommunen.</em></h1>
+                <p class="hero-copy">Giv eleverne mere end en oprydningsdag. Et færdigt undervisningsforløb hjælper skoler med at undersøge plastik og affald, arbejde tværfagligt og omsætte lokale fund til handling.</p>
+                <div class="hero-actions">
+                    <a class="button" href="mailto:info@plasticchange.org?subject=Foresp%C3%B8rgsel%20om%20kommunalt%20skoleforl%C3%B8b&amp;body=Hej%20Plastic%20Change%2C%0A%0AVi%20vil%20gerne%20h%C3%B8re%20mere%20om%20skoleforl%C3%B8bet%20til%20kommuner.%0A%0AKommune%3A%20%0AAntal%20skoler%3A%20%0A%C3%98nsket%20opstart%3A%20%0A%0AVenlig%20hilsen">Få et tilbud til jeres kommune <span aria-hidden="true">→</span></a>
+                    <a class="button button-light" href="#forloeb">Se hvad forløbet indeholder</a>
+                </div>
+                <ul class="reassurance" aria-label="Fordele for kommunen"><li>Klare rammer for skolerne</li><li>Materialer til lærerne</li><li>Tilpasses kommunens behov</li></ul>
+            </div>
+            <div class="hero-image"><img src="assets/community.jpg" alt="Børn og voksne samarbejder om en cleanup" fetchpriority="high" decoding="async"><div class="image-note"><strong>Fra lokal handling til fælles læring</strong>Eleverne undersøger affaldet og taler om, hvordan det kan forebygges.</div></div>
+        </section>
+        <section class="section" aria-labelledby="value-title">
+            <div class="wrap">
+                <div class="section-heading"><p class="eyebrow">Værdi for hele kommunen</p><h2 id="value-title">Én fælles ramme. Plads til lokale forskelle.</h2><p>Gør det lettere for skoler at komme i gang med et relevant forløb — uden at hver lærer skal opfinde alle aktiviteter fra bunden.</p></div>
+                <div class="benefits">
+                    <article class="benefit"><span class="icon" aria-hidden="true">▤</span><h3>Nemmere for skolerne</h3><p>En tydelig struktur og færdige lærerpakker giver et konkret udgangspunkt for planlægningen.</p></article>
+                    <article class="benefit"><span class="icon" aria-hidden="true">◎</span><h3>Faglig læring tæt på</h3><p>Brug lokale fund som afsæt for spørgsmål om plastik, forbrug, affald og forebyggelse.</p></article>
+                    <article class="benefit"><span class="icon" aria-hidden="true">↗</span><h3>Synlig fælles indsats</h3><p>Skoler kan arbejde med samme tema og metode, mens aktiviteterne tager udgangspunkt i deres nærområde.</p></article>
+                </div>
+            </div>
+        </section>
+        <section class="section program" id="forloeb" aria-labelledby="program-title">
+            <div class="wrap program-layout">
+                <div class="program-image"><img src="assets/school-cleanup.jpg" alt="En elev samler affald op under en cleanup" loading="lazy" decoding="async"></div>
+                <div>
+                    <p class="eyebrow">Hvad får skolerne?</p>
+                    <h2 id="program-title">Et forløb, der binder oplevelse og undervisning sammen.</h2>
+                    <p class="hero-copy">Eleverne går fra at se affald til at stille spørgsmål om, hvordan det opstår — og hvad man kan gøre ved det.</p>
+                    <ul class="program-list">
+                        <li>Færdige lærerpakker og elevopgaver.</li>
+                        <li>Før-, under- og efteraktiviteter omkring cleanupen.</li>
+                        <li>Faglig viden og mulighed for tværfaglige forløb.</li>
+                        <li>Opfølgning på fund og resultater.</li>
+                        <li>Mulighed for workshops og besøg fra Plastic Change.</li>
+                    </ul>
+                    <a class="button" href="#kontakt">Tal med os om jeres skoler <span aria-hidden="true">→</span></a>
+                </div>
+            </div>
+        </section>
+        <section class="section" aria-labelledby="process-title">
+            <div class="wrap">
+                <div class="section-heading"><p class="eyebrow">En enkel vej fra interesse til opstart</p><h2 id="process-title">Sådan kommer kommunen videre.</h2></div>
+                <div class="steps">
+                    <article class="step"><h3>Fortæl om jeres behov</h3><p>Del hvor mange skoler I vil involvere, og hvad I gerne vil have hjælp til.</p></article>
+                    <article class="step"><h3>Få en løsning og pris</h3><p>Tal med Plastic Change om omfang, materialer, workshops og en pris, der passer til aftalen.</p></article>
+                    <article class="step"><h3>Gør skolerne klar</h3><p>Aftal rammer og næste skridt, så lærere ved, hvad de kan bruge og hvornår.</p></article>
+                </div>
+            </div>
+        </section>
+        <section class="budget" id="kontakt" aria-labelledby="budget-title">
+            <div class="wrap budget-card">
+                <div><p class="eyebrow">Kommunal aftale</p><h2 id="budget-title">Få et tilbud, der passer til jeres kommune.</h2><p>Pris og omfang afhænger af, hvor mange skoler der deltager, og hvilken støtte I ønsker. Tag en uforpligtende dialog med Plastic Change om mulighederne — uden at skulle vælge en pakke på forhånd.</p></div>
+                <a class="button" href="mailto:info@plasticchange.org?subject=Foresp%C3%B8rgsel%20om%20kommunalt%20skoleforl%C3%B8b&amp;body=Hej%20Plastic%20Change%2C%0A%0AVi%20vil%20gerne%20h%C3%B8re%20mere%20om%20skoleforl%C3%B8bet%20til%20kommuner.%0A%0AKommune%3A%20%0AAntal%20skoler%3A%20%0A%C3%98nsket%20opstart%3A%20%0A%0AVenlig%20hilsen">Kontakt Plastic Change <span aria-hidden="true">↗</span></a>
+            </div>
+        </section>
+        <section class="section faq" aria-labelledby="faq-title">
+            <div class="wrap">
+                <div class="section-heading"><p class="eyebrow">Godt at vide</p><h2 id="faq-title">Spørgsmål fra kommuner.</h2></div>
+                <div class="faq-list">
+                    <details><summary>Hvad betaler kommunen for?</summary><p>Omfanget aftales direkte med Plastic Change. Dialogen kan afklare materialer, antal skoler og eventuelle workshops eller besøg, før kommunen tager stilling til et tilbud.</p></details>
+                    <details><summary>Skal alle skoler deltage?</summary><p>Nej. I kan tage en dialog om, hvor mange skoler der skal være med, og hvordan forløbet passer ind i jeres lokale planer.</p></details>
+                    <details><summary>Er det kun en enkelt oprydningsdag?</summary><p>Nej. Skoleforløbet er tænkt til før, under og efter cleanupen, så eleverne kan arbejde med fund, faglig viden og mulige handlinger.</p></details>
+                    <details><summary>Hvordan får vi en pris?</summary><p>Kontakt Plastic Change og fortæl kort om kommunens ønsker. I kan derefter afklare et passende omfang og få information om pris og næste skridt.</p></details>
+                </div>
+            </div>
+        </section>
+        <section class="closing" aria-labelledby="closing-title">
+            <h2 id="closing-title">Klar til at undersøge mulighederne?</h2>
+            <p>Start med en kort dialog om skoler, omfang og støttebehov. Så kan I vurdere, om skoleforløbet passer til kommunen.</p>
+            <a class="button" href="mailto:info@plasticchange.org?subject=Foresp%C3%B8rgsel%20om%20kommunalt%20skoleforl%C3%B8b&amp;body=Hej%20Plastic%20Change%2C%0A%0AVi%20vil%20gerne%20h%C3%B8re%20mere%20om%20skoleforl%C3%B8bet%20til%20kommuner.%0A%0AKommune%3A%20%0AAntal%20skoler%3A%20%0A%C3%98nsket%20opstart%3A%20%0A%0AVenlig%20hilsen">Kontakt Plastic Change <span aria-hidden="true">↗</span></a>
+        </section>
+    </main>
+    <footer class="site-footer"><div class="footer-inner"><a class="footer-brand" href="index.html" aria-label="Plastic Change — tilbage til forsiden"><img src="assets/plastic-change-logo.png" alt="Plastic Change"></a><nav class="footer-links" aria-label="Sidste navigation"><a href="index.html#top">Forside</a><a href="kommuner-skoleforloeb.html#forloeb">Skoleforløbet</a><a href="viden.html">Viden</a><a href="start-cleanup.html">Start en cleanup</a><a href="stoet-plastic-change.html">Støt Plastic Change</a></nav><p class="footer-note">Saml · Forstå · Forandre</p></div></footer>
+    <script>
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navigation = document.querySelector('.nav-links');
+        menuToggle.addEventListener('click', () => {
+            const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
+            menuToggle.setAttribute('aria-expanded', String(!isOpen));
+            menuToggle.setAttribute('aria-label', isOpen ? 'Åbn menu' : 'Luk menu');
+            navigation.classList.toggle('is-open', !isOpen);
+        });
+        navigation.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
+            navigation.classList.remove('is-open');
+            menuToggle.setAttribute('aria-expanded', 'false');
+            menuToggle.setAttribute('aria-label', 'Åbn menu');
+        }));
+    </script>
+    <script src="assets/site-motion.js" defer></script>
+</body>
+</html>

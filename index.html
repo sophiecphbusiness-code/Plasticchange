@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0d5c50">
+    <meta name="description" content="Gør World Cleanup Day til en dag med fællesskab, læring og konkret handling. Få en enkel guide til jeres cleanup med Plastic Change.">
+    <title>World Cleanup Day — Plastic Change</title>
+    <style>
+        @font-face { font-family: "Campton"; src: url("assets/fonts/CamptonBook.otf") format("opentype"); font-style: normal; font-weight: 400 500; font-display: swap; }
+        @font-face { font-family: "Campton"; src: url("assets/fonts/CamptonBold.otf") format("opentype"); font-style: normal; font-weight: 600 900; font-display: swap; }
+        @font-face { font-family: "Rubik"; src: url("assets/fonts/Rubik-Regular.ttf") format("truetype"); font-style: normal; font-weight: 400; font-display: swap; }
+        @font-face { font-family: "Rubik"; src: url("assets/fonts/Rubik-Medium.ttf") format("truetype"); font-style: normal; font-weight: 500; font-display: swap; }
+        @font-face { font-family: "Rubik"; src: url("assets/fonts/Rubik-Bold.ttf") format("truetype"); font-style: normal; font-weight: 700 900; font-display: swap; }
+        :root {
+            --ink: #35363f;
+            --blue: #ff1054;
+            --blue-light: #fff0f4;
+            --green: #287152;
+            --green-light: #eaf4ee;
+            --pink: #ff1054;
+            --pink-light: #fff0f4;
+            --paper: #f8f8f9;
+            --white: #fff;
+            --muted: #70727e;
+            --line: #e1e2e6;
+            --serif: "Campton", sans-serif;
+            --sans: "Rubik", sans-serif;
+        }
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+        body { margin: 0; color: var(--ink); background: var(--paper); font-family: var(--sans); line-height: 1.55; }
+        a { color: inherit; }
+        button, input, select { font: inherit; }
+        button, a { -webkit-tap-highlight-color: transparent; }
+        .skip-link { position: absolute; z-index: 20; top: -50px; left: 16px; padding: 10px 14px; background: white; border-radius: 8px; }
+        .skip-link:focus { top: 12px; }
+        .announcement { padding: 9px 20px; text-align: center; color: white; background: var(--pink); font-size: .78rem; letter-spacing: .035em; }
+        .announcement strong { color: white; }
+        .site-header { position: sticky; z-index: 10; top: 0; background: rgba(255,255,255,.97); border-bottom: 1px solid rgba(53,54,63,.09); backdrop-filter: blur(12px); }
+        .nav-wrap { width: min(1180px, calc(100% - 48px)); height: 78px; margin: auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+        .brand { display: inline-flex; align-items: center; text-decoration: none; }
+        .brand img { display: block; width: 168px; height: auto; }
+        .nav-links { display: flex; align-items: center; gap: clamp(18px, 3vw, 40px); }
+        .nav-links a { text-decoration: none; font-size: .84rem; font-weight: 700; }
+        .nav-links a:hover, .footer-links a:hover { color: var(--blue); }
+        .nav-links a.support-cta:hover { color: white; }
+        .button { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; padding: 0 21px; border: 0; border-radius: 999px; background: var(--pink); color: white; text-decoration: none; font-size: .88rem; font-weight: 800; cursor: pointer; transition: transform .18s ease, background .18s ease; }
+        .button:hover { transform: translateY(-2px); background: #e20d4c; }
+        .button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid #f4a3b7; outline-offset: 3px; }
+        .button-dark { background: var(--ink); }
+        .button-dark:hover { background: #4b4d58; }
+        .button-light { background: white; color: var(--ink); border: 1px solid var(--line); }
+        .button-light:hover { background: var(--blue-light); }
+        .menu-toggle { display: none; width: 44px; height: 44px; border: 1px solid var(--line); border-radius: 50%; background: white; color: var(--ink); cursor: pointer; font-size: 1.2rem; }
+        main { overflow: hidden; }
+        .hero { position: relative; padding: 60px 0 76px; background: var(--blue-light); }
+        .hero-inner { position: relative; z-index: 1; display: grid; grid-template-columns: 1.03fr .97fr; align-items: center; gap: 55px; width: min(1180px, calc(100% - 48px)); margin: auto; }
+        .eyebrow { display: inline-flex; align-items: center; gap: 9px; margin: 0 0 18px; color: var(--green); font-size: .75rem; font-weight: 900; letter-spacing: .11em; text-transform: uppercase; }
+        .eyebrow:before { width: 24px; height: 2px; background: currentColor; content: ""; }
+        h1, h2, h3, p { margin-top: 0; }
+        h1, h2, h3 { font-family: var(--serif); }
+        h1 { max-width: 620px; margin-bottom: 21px; font-family: var(--serif); font-size: clamp(3rem, 6.1vw, 5.6rem); font-weight: 700; letter-spacing: -.065em; line-height: .98; }
+        h1 em { color: var(--pink); font-style: normal; font-weight: 700; }
+        .hero-copy { max-width: 515px; margin-bottom: 28px; color: var(--muted); font-size: 1.08rem; }
+        .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+        .hero-note { display: flex; align-items: center; gap: 10px; margin-top: 22px; color: var(--muted); font-size: .78rem; }
+        .hero-note span { display: grid; width: 23px; height: 23px; place-items: center; border-radius: 50%; background: #d6ebdc; color: var(--green); font-weight: 900; }
+        .hero-visual { position: relative; min-height: 450px; }
+        .hero-photo { position: absolute; inset: 4px 15px 18px 20px; overflow: hidden; border-radius: 45% 45% 5% 5% / 35% 35% 5% 5%; background: #b6d6e2; }
+        .hero-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 58% center; }
+        .photo-caption { position: absolute; right: 0; bottom: 0; display: flex; align-items: center; gap: 10px; max-width: 245px; padding: 15px 18px; border-radius: 16px; background: white; box-shadow: 0 12px 35px #102b4a1c; font-size: .78rem; font-weight: 750; }
+        .caption-icon { display: grid; flex: 0 0 35px; height: 35px; place-items: center; border-radius: 50%; background: var(--green-light); color: var(--green); font-size: 1.1rem; }
+        .photo-sticker { position: absolute; top: 27px; left: -5px; display: grid; width: 91px; height: 91px; place-content: center; border: 5px solid var(--blue-light); border-radius: 50%; background: var(--pink); color: white; text-align: center; font-family: var(--serif); font-size: 1.08rem; line-height: 1; transform: rotate(-11deg); }
+        .photo-sticker small { font-family: var(--sans); font-size: .55rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+        section.content-section { padding: 105px 0; }
+        .section-inner { width: min(1120px, calc(100% - 48px)); margin: auto; }
+        .section-heading { max-width: 670px; margin-bottom: 46px; }
+        .section-heading h2 { margin-bottom: 15px; font-family: var(--serif); font-size: clamp(2.25rem, 4vw, 3.5rem); letter-spacing: -.045em; line-height: 1.05; }
+        .section-heading p { max-width: 590px; margin-bottom: 0; color: var(--muted); font-size: 1rem; }
+        .center-heading { margin-right: auto; margin-left: auto; text-align: center; }
+        .center-heading .eyebrow { justify-content: center; }
+        .center-heading p { margin-right: auto; margin-left: auto; }
+        .audiences { padding: 91px 0 100px; background: #fff; }
+        #skole-familie .eyebrow { color: var(--pink); }
+        .audience-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+        .audience-card { display: flex; min-height: 295px; flex-direction: column; align-items: flex-start; padding: 27px; border: 1px solid var(--line); border-top: 4px solid var(--pink); border-radius: 20px; background: var(--pink-light); box-shadow: 0 8px 24px rgba(53,54,63,.06); transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
+        .audience-card:hover { transform: translateY(-4px); border-color: #f4a3b7; border-top-color: var(--pink); box-shadow: 0 14px 30px rgba(53,54,63,.1); }
+        .audience-card:nth-child(2) { border-top-color: var(--pink); }
+        .audience-card:nth-child(3) { border-top-color: var(--pink); }
+        .audience-icon { display: grid; width: 48px; height: 48px; margin-bottom: 21px; place-items: center; border: 1px solid rgba(53,54,63,.08); border-radius: 15px; background: white; color: var(--blue); font-size: 1.35rem; }
+        .audience-card:nth-child(3) .audience-icon { color: var(--pink); }
+        .audience-card h3 { margin-bottom: 8px; font-size: 1.2rem; }
+        .audience-card p { margin-bottom: 21px; color: var(--muted); font-size: .88rem; }
+        .text-link { display: inline-flex; align-items: center; gap: 8px; margin-top: auto; color: var(--blue); font-size: .86rem; font-weight: 850; text-decoration: none; }
+        .text-link:hover { gap: 13px; }
+        .learning { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 70px; }
+        .learning-image { position: relative; height: 400px; overflow: hidden; border-radius: 48% 48% 18px 18px / 35% 35% 18px 18px; background: var(--green-light); }
+        .learning-image img { width: 100%; height: 100%; object-fit: cover; }
+        .learning-copy h2 { margin-bottom: 16px; font-family: var(--serif); font-size: clamp(2.3rem, 4vw, 3.5rem); letter-spacing: -.05em; line-height: 1.03; }
+        .learning-copy .eyebrow { color: var(--pink); }
+        .learning-copy > p { color: var(--muted); }
+        .learning-copy .button-dark { background: var(--pink); }
+        .learning-copy .button-dark:hover { background: #e20d4c; }
+        .check-list { display: grid; gap: 13px; margin: 25px 0 29px; padding: 0; list-style: none; }
+        .check-list li { display: flex; gap: 11px; align-items: flex-start; font-size: .9rem; }
+        .check-list li:before { display: grid; flex: 0 0 22px; height: 22px; place-items: center; border-radius: 50%; background: var(--green-light); color: var(--green); content: "✓"; font-size: .76rem; font-weight: 900; }
+        .closing { padding: 72px 24px; background: var(--pink); color: white; text-align: center; }
+        .closing h2 { margin-bottom: 13px; font-family: var(--serif); font-size: clamp(2.35rem, 5vw, 4rem); letter-spacing: -.05em; line-height: 1; }
+        .closing p { margin-bottom: 24px; color: rgba(255,255,255,.9); }
+        .closing .button { border: 1px solid white; background: white; color: var(--pink); }
+        .closing .button:hover { background: var(--pink-light); }
+        footer { padding: 33px 0; background: #fff; color: var(--ink); border-top: 1px solid var(--line); }
+        .footer-inner { display: flex; width: min(1120px, calc(100% - 48px)); margin: auto; align-items: center; justify-content: space-between; gap: 25px; }
+        .footer-brand img { width: 168px; }
+        .footer-links { display: flex; flex-wrap: wrap; gap: 24px; }
+        .footer-links a { color: var(--muted); font-size: .78rem; text-decoration: none; }
+        .footer-note { max-width: 245px; color: var(--muted); font-size: .72rem; }
+        @media (max-width: 800px) {
+            .nav-wrap { width: min(100% - 32px, 680px); height: 68px; }
+            .menu-toggle { display: block; }
+            .nav-links { position: absolute; top: 67px; right: 0; left: 0; display: none; padding: 20px 24px 24px; flex-direction: column; align-items: stretch; gap: 0; border-bottom: 1px solid var(--line); background: var(--paper); }
+            .nav-links.is-open { display: flex; }
+            .nav-links a { padding: 12px 0; }
+            .nav-links .button { margin-top: 8px; }
+            .hero { padding: 46px 0 70px; }
+            .hero-inner { grid-template-columns: 1fr; gap: 34px; width: min(100% - 40px, 620px); }
+            .hero-visual { min-height: 400px; }
+            .hero-photo { inset: 0 15px 12px 22px; }
+            .trust-strip { width: min(100% - 36px, 620px); flex-wrap: wrap; justify-content: flex-start; gap: 17px 25px; }
+            .trust-item { flex: 1 1 180px; }
+            section.content-section { padding: 76px 0; }
+            .section-inner { width: min(100% - 40px, 680px); }
+            .audience-grid { grid-template-columns: 1fr; }
+            .audiences { padding: 76px 0; }
+            .audience-card { min-height: 245px; }
+            .learning { grid-template-columns: 1fr; gap: 34px; }
+            .learning-image { height: 340px; }
+            .footer-inner { flex-wrap: wrap; }
+        }
+        @media (max-width: 460px) {
+            .announcement { font-size: .68rem; }
+            .hero-inner { width: calc(100% - 36px); }
+            h1 { font-size: clamp(2.8rem, 14vw, 4rem); }
+            .hero-copy { font-size: .98rem; }
+            .hero-actions { align-items: stretch; flex-direction: column; }
+            .hero-visual { min-height: 330px; }
+            .photo-sticker { width: 76px; height: 76px; font-size: .9rem; }
+            .photo-caption { max-width: 215px; font-size: .71rem; }
+            .trust-item { flex-basis: 100%; }
+            .footer-links { gap: 15px; }
+            .footer-note { max-width: none; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *:before, *:after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+        }
+        :root {
+            --ink: #35363f;
+            --blue: #ff1054;
+            --blue-light: #fff0f4;
+            --green: #287152;
+            --green-light: #eaf4ee;
+            --pink: #ff1054;
+            --pink-light: #fff0f4;
+            --paper: #f8f8f9;
+            --muted: #70727e;
+            --line: #e1e2e6;
+        }
+        .announcement { background: #ff1054; }
+        .site-header { background: rgba(255,255,255,.98); }
+        .nav-links a:hover, .footer-links a:hover { color: #ff1054; }
+        .button { border-radius: 9px; background: #ff1054; }
+        .button:hover { background: #e20d4c; }
+        .button-dark, .learning-copy .button-dark { background: #ff1054; }
+        .button-dark:hover, .learning-copy .button-dark:hover { background: #e20d4c; }
+        .button-light { border-color: #e1e2e6; background: rgba(255,255,255,.93); }
+        .button-light:hover { background: #fff0f4; }
+        .hero { min-height: 90vh; min-height: 90svh; padding: 0; background: #fff0f4; }
+        .hero-inner { display: flex; justify-content: center; min-height: 90vh; min-height: 90svh; align-items: center; padding-top: 24px; padding-bottom: 20px; }
+        .hero-inner > div:first-child { position: relative; z-index: 1; width: min(740px, calc(100vw - 40px)); padding: clamp(22px, 3vw, 38px); border: 1px solid rgba(255,255,255,.72); border-radius: 20px; background: rgba(255,255,255,.91); box-shadow: 0 12px 36px rgba(35,35,45,.1); }
+        .hero .eyebrow { margin-bottom: 15px; color: #ff1054; }
+        .hero .eyebrow:before { display: none; }
+        h1 { max-width: 560px; margin-bottom: 13px; color: #35363f; font-size: clamp(3.4rem, 6vw, 5.35rem); letter-spacing: -.06em; line-height: .99; }
+        h1 em { color: #ff1054; }
+        .hero-copy { max-width: 480px; margin-bottom: 18px; color: #70727e; font-size: 1.05rem; line-height: 1.45; }
+        .hero-actions { gap: 12px; }
+        .hero-note { display: none; }
+        .hero-visual { position: absolute; z-index: 0; inset: 0 auto 0 50%; width: 100vw; min-height: 0; transform: translateX(-50%); pointer-events: none; }
+        .hero-photo { inset: 0; border-radius: 0; background: #d9e8df; }
+        .hero-photo:after { position: absolute; inset: 0; background: transparent; content: ""; pointer-events: none; }
+        .hero-photo img, .hero-photo video { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 52%; }
+        .hero-photo video { position: relative; z-index: 0; pointer-events: auto; }
+        .photo-sticker { z-index: 2; top: 0; right: 0; left: auto; width: 180px; height: 148px; padding: 18px; border: 0; border-radius: 38% 12% 34% 16% / 18% 35% 15% 34%; background: #ff1054; color: #fff; font-family: var(--sans); font-size: 1.08rem; font-weight: 800; line-height: 1.35; text-transform: uppercase; transform: translate(24%, -26%) rotate(5deg); }
+        .photo-sticker small { display: none; }
+        .photo-caption { right: 0; bottom: 18px; max-width: 260px; border: 1px solid #e4e8df; border-radius: 12px; box-shadow: 0 8px 24px #102b4a20; font-size: .72rem; font-weight: 500; }
+        .photo-caption strong { color: #35363f; font-size: .78rem; }
+        .caption-icon { border-radius: 8px; background: #eaf4ee; color: #287152; font-size: 1.2rem; }
+        .trust-strip { display: flex; width: min(100%, 620px); max-width: 620px; align-items: center; gap: 0; margin: 26px auto 0; }
+        .trust-item { display: flex; flex: 1; align-items: center; gap: 9px; padding: 0 14px; border-right: 1px solid rgba(53,54,63,.15); color: #35363f; font-size: .72rem; font-weight: 500; line-height: 1.35; }
+        .trust-item:first-child { padding-left: 0; }
+        .trust-item:last-child { border-right: 0; }
+        .trust-item > span:first-child { color: #287152; font-size: 1.35rem; font-weight: 700; }
+        .audiences { padding: 96px 0 120px; background: #fff; }
+        .audiences .section-heading { max-width: none; margin-bottom: 24px; }
+        .audiences .section-heading .eyebrow { display: inline-flex; font-size: .75rem; }
+        .audiences .section-heading h2 { margin-bottom: 8px; font-size: clamp(2.3rem, 4vw, 3.5rem); }
+        .audiences .section-heading > p:last-child { font-size: .94rem; }
+        .audience-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+        .audience-card { position: relative; display: flex; min-height: 300px; flex-direction: row; gap: 18px; overflow: hidden; padding: 20px; border: 0; border-radius: 12px; background: linear-gradient(110deg, #fff0f4 0%, #fff7f8 100%); box-shadow: none; }
+        .audience-card:hover { transform: translateY(-2px); border: 0; box-shadow: 0 9px 24px rgba(18,59,59,.09); }
+        .audience-card-school { background: linear-gradient(110deg, #fff0f4 0%, #fff7f8 100%); }
+        .popular-badge { position: absolute; z-index: 2; top: 12px; right: 18px; display: inline-flex; width: auto; min-width: 126px; height: 46px; align-items: center; justify-content: center; padding: 0 15px; border-radius: 38% 16% 35% 14% / 18% 36% 16% 34%; background: #ff1054; color: #fff; font-size: .68rem; font-weight: 800; line-height: 1; text-align: center; text-transform: uppercase; white-space: nowrap; transform: rotate(7deg); box-shadow: 0 5px 14px rgba(53,54,63,.16); }
+        .audience-content { display: flex; min-width: 0; flex: 1; flex-direction: column; align-items: flex-start; }
+        .audience-icon { float: left; width: auto; height: auto; margin: 0 12px 9px 0; border: 0; border-radius: 0; background: transparent; color: #ff1054; font-size: 2rem; line-height: 1.1; }
+        .audience-card h3 { margin: 0 0 2px; font-size: 1.32rem; line-height: 1.35; }
+        .audience-card p { margin-bottom: 13px; color: #70727e; font-size: .86rem; }
+        .card-list { display: grid; gap: 7px; margin: 0 0 17px; padding: 0; list-style: none; }
+        .card-list li { display: flex; align-items: flex-start; gap: 9px; color: #35363f; font-size: .78rem; line-height: 1.35; }
+        .card-list li:before { display: grid; flex: 0 0 16px; height: 16px; place-items: center; margin-top: 1px; border-radius: 50%; background: #287152; color: white; content: "✓"; font-size: .62rem; font-weight: 900; }
+        .audience-card .button { min-height: 44px; margin-top: auto; padding: 0 17px; font-size: .8rem; }
+        .audience-photo { width: 30%; min-width: 112px; height: 258px; align-self: center; border-radius: 9px; object-fit: cover; object-position: 56% center; }
+        .audience-card-school .audience-photo { object-position: 40% center; }
+        #skole-familie .eyebrow, .learning-copy .eyebrow { color: #ff1054; }
+        .closing { position: relative; display: flex; min-height: 190px; align-items: center; justify-content: space-between; gap: 28px; margin: 36px auto 0; padding: 36px max(28px, calc((100% - 1120px) / 2)); overflow: hidden; background: linear-gradient(90deg, rgba(10,39,66,.82), rgba(10,39,66,.56)), url("ocean.jpeg") center 48% / cover; color: #fff; text-align: left; }
+        .closing h2 { margin-bottom: 6px; font-size: clamp(1.5rem, 3vw, 2.15rem); letter-spacing: -.04em; line-height: 1.1; }
+        .closing p { max-width: 720px; margin: 0; color: rgba(255,255,255,.92); font-size: .9rem; }
+        .closing .button { flex: 0 0 auto; min-height: 46px; border: 0; background: #ff1054; color: #fff; }
+        .closing .button:hover { background: #df0e4b; }
+        @media (max-width: 800px) {
+            .hero-inner { grid-template-columns: minmax(0, 1fr); width: min(100% - 24px, 680px); min-height: 90vh; min-height: 90svh; padding-top: 35px; padding-bottom: 35px; }
+            .hero-inner > div:first-child { width: min(740px, calc(100vw - 32px)); max-width: 740px; padding: clamp(22px, 5vw, 34px); }
+            .hero h1 { max-width: none; font-size: clamp(2.5rem, 7.2vw, 3.8rem); }
+            .hero-copy { max-width: 540px; }
+            .hero-visual { left: 50%; width: 100vw; transform: translateX(-50%); opacity: 1; }
+            .hero-photo:after { background: transparent; }
+            .photo-sticker { top: 0; right: 0; width: 142px; height: 118px; padding: 14px; font-size: .82rem; transform: translate(12%, -22%) rotate(5deg); }
+            .photo-caption { display: none; }
+            .trust-strip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: 100%; gap: 0; }
+            .trust-item { min-width: 0; padding: 0 10px; font-size: .68rem; }
+            .trust-item:first-child { padding-left: 0; }
+            .audiences { padding-top: 68px; }
+            .audience-grid { grid-template-columns: 1fr; }
+            .audience-card { min-height: 270px; }
+            .audience-photo { height: 228px; }
+            .popular-badge { right: 13px; min-width: 118px; height: 42px; padding: 0 12px; font-size: .64rem; }
+            .closing { min-height: 0; align-items: flex-start; flex-direction: column; gap: 16px; margin: 26px auto 0; padding: 30px 24px; }
+            .closing p { font-size: .84rem; }
+        }
+        @media (max-width: 460px) {
+            .hero-inner { padding-top: 28px; padding-bottom: 28px; }
+            .hero h1 { font-size: clamp(2.45rem, 10.5vw, 3rem); }
+            .hero-copy { max-width: 100%; }
+            .trust-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 12px; }
+            .trust-item { flex-basis: auto; padding: 0 8px; font-size: .68rem; }
+            .trust-item:nth-child(2) { border-right: 0; }
+            .trust-item:last-child { grid-column: 1 / -1; }
+            .photo-sticker { right: 0; width: 112px; height: 92px; padding: 10px; font-size: .66rem; transform: translate(8%, -20%) rotate(5deg); }
+            .photo-caption { right: 2px; bottom: 116px; max-width: 195px; padding: 10px; }
+            .audience-card { gap: 10px; padding: 16px; }
+            .audience-photo { width: 31%; min-width: 90px; height: 210px; }
+            .audience-card h3 { font-size: 1.08rem; }
+            .audience-card p, .card-list li { font-size: .72rem; }
+            .audience-card .button { padding: 0 11px; font-size: .72rem; }
+        }
+    </style>
+    <link rel="stylesheet" href="assets/site-chrome.css">
+</head>
+<body>
+    <a class="skip-link" href="#main">Spring til indhold</a>
+    <div class="announcement"><strong>World Cleanup Day</strong> · Små handlinger. En stor forskel sammen.</div>
+    <header class="site-header">
+        <div class="nav-wrap">
+            <a class="brand" href="#top" aria-label="Plastic Change — forsiden">
+                <img src="assets/plastic-change-logo.png" alt="Plastic Change">
+            </a>
+            <button class="menu-toggle" type="button" aria-label="Åbn menu" aria-expanded="false" aria-controls="main-nav">☰</button>
+            <nav class="nav-links" id="main-nav" aria-label="Hovedmenu">
+                <a href="index.html#top">Forside</a>
+                <a href="kommuner-skoleforloeb.html#forloeb">Skoleforløb</a>
+                <a href="viden.html">Viden</a>
+                <a class="button" href="start-cleanup.html">Start en cleanup</a>
+                <a class="button" href="stoet-plastic-change.html">Støt Plastic Change</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main">
+        <section class="hero" id="top" aria-labelledby="hero-title">
+            <div class="hero-inner">
+                <div>
+                    <p class="eyebrow">World Cleanup Day · Sammen skaber vi forandring</p>
+                    <h1 id="hero-title">Fra fund<br>til forandring</h1>
+                    <p class="hero-copy">Gør World Cleanup Day til mere end en oprydningsdag – sammen skaber vi viden, handling og varig forandring for en verden med mindre plastik.</p>
+                    <div class="hero-actions">
+                        <a class="button button-light" href="start-cleanup.html">Start Cleanup <span aria-hidden="true">→</span></a>
+                        <a class="button" href="kommuner-skoleforloeb.html">Se skoleforløb <span aria-hidden="true">→</span></a>
+                    </div>
+                    <div class="trust-strip" aria-label="Fordele ved World Cleanup Day">
+                        <div class="trust-item"><span aria-hidden="true">♧</span><span>Gratis for alle<br>over hele Danmark</span></div>
+                        <div class="trust-item"><span aria-hidden="true">◎</span><span>En del af en global<br>bevægelse</span></div>
+                        <div class="trust-item"><span aria-hidden="true">▥</span><span>Fra lokale fund<br>til global forandring</span></div>
+                    </div>
+                    <div class="photo-sticker" aria-label="Små fund skaber store forandringer">Små fund<br>skaber store<br>forandringer</div>
+                </div>
+                <div class="hero-visual">
+                    <div class="hero-photo"><video autoplay muted loop playsinline preload="auto" poster="assets/cleanup.jpg" aria-label="Video om Plastic Change og World Cleanup Day"><source src="plasticvideo.mp4" type="video/mp4">Din browser understøtter ikke videoafspilning.</video></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="audiences" id="skole-familie" aria-labelledby="audience-title">
+            <div class="section-inner">
+                    <div class="section-heading">
+                    <p class="eyebrow">Vær med</p>
+                    <h2 id="audience-title">En fælles indsats for alle</h2>
+                    <p>Uanset om I deltager som familie eller skole, er det nemt at komme i gang – og hvert fund tæller.</p>
+                </div>
+                <div class="audience-grid">
+                    <article class="audience-card audience-card-free">
+                        <div class="audience-content"><span class="audience-icon" aria-hidden="true">♧</span><h3>Gratis for alle</h3><p>Vær med – det er nemt og gratis</p>
+                            <ul class="card-list"><li>Trin-for-trin cleanup-guide</li><li>Registrér jeres fund</li><li>Se resultater fra dit område</li><li>Bliv en del af en global bevægelse</li></ul>
+                            <a class="button" href="start-cleanup.html">Start Cleanup <span aria-hidden="true">→</span></a>
+                        </div><img class="audience-photo" src="assets/cleanup.jpg" alt="En hånd samler affald op på stranden" loading="lazy" decoding="async">
+                    </article>
+                    <article class="audience-card audience-card-school">
+                        <span class="popular-badge">Mest<br>populær!</span>
+                        <div class="audience-content"><span class="audience-icon" aria-hidden="true">⌂</span><h3>Udvidet skoleforløb</h3><p>Fra oprydning til læring og handling</p>
+                            <ul class="card-list"><li>Færdige lærerpakker og elevopgaver</li><li>Før, under og efter-aktiviteter</li><li>Faglig viden og tværfaglige forløb</li><li>Opfølgning på resultater</li></ul>
+                            <a class="button" href="kommuner-skoleforloeb.html">Se skoleforløb <span aria-hidden="true">→</span></a>
+                        </div><img class="audience-photo" src="ChatGPT-Image-May-17-2026-04_07_10-PM.webp" alt="Børn og voksne deltager i World Cleanup Day på stranden" loading="lazy" decoding="async">
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section" id="laer" aria-labelledby="learn-title">
+            <div class="section-inner learning">
+                <div class="learning-image"><img src="assets/school-cleanup.jpg" alt="En hånd samler en plastikflaske op blandt affald på en strand" loading="lazy" decoding="async"></div>
+                <div class="learning-copy">
+                    <p class="eyebrow">Fra fund til forandring</p>
+                    <h2>Det vigtigste fund er måske det, I lærer.</h2>
+                    <p>En cleanup fjerner affald her og nu. Når børn også undersøger, hvorfor affaldet endte dér, bliver oplevelsen begyndelsen på en større samtale — uden løftede pegefingre.</p>
+                    <ul class="check-list"><li>Registrér, hvad der går igen — uden at gøre det til en konkurrence.</li><li>Tal om, hvor affaldet kan komme fra, og hvem der kan forebygge det.</li><li>Vælg én lille, konkret handling, som klassen eller familien kan afprøve.</li></ul>
+                    <a class="button button-dark" href="start-cleanup.html">Tag første skridt <span aria-hidden="true">→</span></a>
+                </div>
+            </div>
+        </section>
+
+        <section class="closing" aria-labelledby="closing-title">
+            <div>
+                <h2 id="closing-title">Skal din skole eller kommune være med?</h2>
+                <p>Kontakt Plastic Change om skoleforløb, workshops eller et skræddersyet samarbejde.</p>
+            </div>
+            <a class="button" href="mailto:info@plasticchange.org?subject=Foresp%C3%B8rgsel%20om%20skoleforl%C3%B8b%20eller%20samarbejde&amp;body=Hej%20Plastic%20Change%2C%0A%0AVi%20vil%20gerne%20h%C3%B8re%20mere%20om%20skoleforl%C3%B8b%2C%20workshops%20eller%20et%20samarbejde.%0A%0ASkole%20eller%20kommune%3A%20%0A%0AVenlig%20hilsen">Kontakt os om skoleforløb <span aria-hidden="true">→</span></a>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <a class="brand footer-brand" href="index.html#top" aria-label="Plastic Change — til toppen"><img src="assets/plastic-change-logo.png" alt="Plastic Change"></a>
+            <nav class="footer-links" aria-label="Sidste navigation"><a href="index.html#top">Forside</a><a href="kommuner-skoleforloeb.html#forloeb">Skoleforløbet</a><a href="viden.html">Viden</a><a href="start-cleanup.html">Start en cleanup</a><a href="stoet-plastic-change.html">Støt Plastic Change</a></nav>
+            <p class="footer-note">Saml · Forstå · Forandre</p>
+        </div>
+    </footer>
+    <script>
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navigation = document.querySelector('.nav-links');
+        menuToggle.addEventListener('click', () => {
+            const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
+            menuToggle.setAttribute('aria-expanded', String(!isOpen));
+            menuToggle.setAttribute('aria-label', isOpen ? 'Åbn menu' : 'Luk menu');
+            navigation.classList.toggle('is-open', !isOpen);
+        });
+        navigation.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
+            navigation.classList.remove('is-open');
+            menuToggle.setAttribute('aria-expanded', 'false');
+            menuToggle.setAttribute('aria-label', 'Åbn menu');
+        }));
+    </script>
+    <script src="assets/site-motion.js" defer></script>
+</body>
+</html>
